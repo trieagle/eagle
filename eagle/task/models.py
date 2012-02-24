@@ -26,6 +26,7 @@ class Task(models.Model):
     begin_time = models.DateTimeField(default=datetime.datetime.now)
     end_time = models.DateTimeField(default=datetime.datetime.now)
     tag = models.ManyToManyField(Tag, blank=True)
+    privacy = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.title
