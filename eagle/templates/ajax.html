@@ -1,0 +1,27 @@
+<html>
+    <head>
+    <script type="text/javascript" src="/static/jquery-1.7.1.min.js"></script>
+    </head>
+
+    <body>
+        <a id="link" href='#'>link</a>
+        <div id="data"></div>
+        <script>
+            $('#link').click(function() {
+                $.ajax({
+                    url:'/update/',
+                    dataType: 'json',
+                    data: '', 
+                    success: function(data) {
+                        //alert('hello');
+                        var items = [];
+                        $.each(data, function(key, val) {
+                            items.push(key+" " + val);
+                        });
+                        $('#data').html(items.join(","));
+                    }
+                })
+            })
+        </script>
+    </body>
+</html>

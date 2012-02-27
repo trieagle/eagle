@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Your Casething</title>
+</head>
+<body>
+	<p align='right'><h2 align = 'center'>Your casething ^^</h2></p>
+    <hr/>
+	<form action="" method="post">
+	{% csrf_token %}
+    <table border="1" cellpadding="1" >
+        {{form.as_table}}        
+    </table>
+    <p>
+	<a href="{%url main%}">return</a> 
+	<a href="">concel</a> 
+	<input type="submit" value="update"/>
+	</p>
+    </form>
+	
+</body>
+</html>
