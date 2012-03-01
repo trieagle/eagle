@@ -1,27 +1,22 @@
 <html>
     <head>
     <script type="text/javascript" src="/static/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="/static/ajax_csrf.js"></script>
     </head>
 
     <body>
-        <a id="link" href='#'>link</a>
-        <div id="data"></div>
-        <script>
-            $('#link').click(function() {
-                $.ajax({
-                    url:'/update/',
-                    dataType: 'json',
-                    data: '', 
-                    success: function(data) {
-                        //alert('hello');
-                        var items = [];
-                        $.each(data, function(key, val) {
-                            items.push(key+" " + val);
-                        });
-                        $('#data').html(items.join(","));
-                    }
-                })
-            })
-        </script>
+	{% csrf_token %}
+	
+	
+        <a id="get_link" href='#'>get link</a>
+        <div id="get_data"></div>
+        
+		<hr><br>
+		 <a id="post_link" href='#'>post link</a>
+        <div id="post_data"></div>
+		
+		
+    <script type="text/javascript" src="/static/mine.js">
+	</script>
     </body>
 </html>

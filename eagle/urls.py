@@ -14,6 +14,9 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'ajax.views.ajax'),
     url(r'^ajax/$', 'ajax.views.ajax'),
     url(r'^update/$', 'ajax.views.update'),
+    url(r'^update2/$', 'ajax.views.update2'),
+    url(r'^update3/$', 'ajax.views.update3'),
 )
