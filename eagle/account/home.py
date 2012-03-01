@@ -37,7 +37,7 @@ def fetch_lists(user_id):
                 task_done.push(task_item)
             elif not task_item.is_expired():
                 year_task.push(task_item)
-                
+    return day_task, week_task, month_task, year_task, task_done                
 
 
 
