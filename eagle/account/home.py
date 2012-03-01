@@ -12,27 +12,27 @@ def fetch_lists(user_id):
     all_tasks = task_model.task.objects.filter(task_onwer=user_id)
     #很糟糕的代码呢，能以多态的方式重构码？
     for task_item in all_tasks:
-        if task_item.mode == 1:
+        if task_item.mode == task_model.ONCE_TASK:
             if task_item.is_done():
                 day_task.push(task_item)
             elif not task_item.is_expired() and task_model.in_today(task_item):
                 task_done.push(task_item)
-        elif task_item.mode == 2:
+        elif task_item.mode == task_model.DAY_TASK:
             if task_item.is_done():
                 task_done.push(task_item)
             if not task_item.is_expired():
                 day_task.push(task_item)
-        elif task_item.mode == 3:
+        elif task_item.mode == task_model.WEEK_TASK:
             if task_item.is_done():
                 task_done.push(task_item)
             elif not task_item.is_expired():
                 week_task.push(task_item)
-        elif task_item.mode == 4:
+        elif task_item.mode == task_model.MONTH_TASK:
             if task_item.is_done():
                 task_done.push(task_item)
             elif not task_item.is_expired():
                 month_task.push(task_item)
-        elif year_task.mode == 5:
+        elif year_task.mode == task_model.YEAR_TASK:
             if task_item.is_done():
                 task_done.push(task_item)
             elif not task_item.is_expired():

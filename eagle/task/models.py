@@ -9,6 +9,8 @@ class Tag(models.Model):
         return self.name
 
 
+TAG_TASK, ONCE_TASK, DAY_TASK, WEEK_TASK, MONTH_TASK, YEAR_TASK = range(6)
+
 class Task(models.Model):
     title = models.CharField(max_length=30)
     detail = models.TextField(blank=True)
