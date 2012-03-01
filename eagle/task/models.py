@@ -28,6 +28,12 @@ class Task(models.Model):
     tag = models.ManyToManyField(Tag, blank=True)
     privacy = models.IntegerField(default=0)
 
+    def is_expired(self):
+        return datetime.datetime.now() < self.begin_time and \
+            datetime.datetime.now() > self.end_time
+    def is_done(self):
+        return self.alive == 1
+
     def __unicode__(self):
         return self.title
     class Meta:
@@ -36,7 +42,9 @@ class Task(models.Model):
         pass
 
 
-
-
+def in_today(a_task):
+    return a_task.year == datetime.datetime.now().year and \
+        a_task.month == datetime.datetime.now().year and \
+        a_task.day == datetime.datetime.now().year
 
 # Create your models here.
