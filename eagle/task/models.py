@@ -46,7 +46,7 @@ class Task(models.Model):
 
 def in_today(a_task):
     return a_task.year == datetime.datetime.now().year and \
-        a_task.month == datetime.datetime.now().year and \
-        a_task.day == datetime.datetime.now().year
+        a_task.month == datetime.datetime.now().month and \
+        a_task.day == datetime.datetime.now().day
 
 # Create your models here.
