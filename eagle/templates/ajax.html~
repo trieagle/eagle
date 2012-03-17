@@ -1,7 +1,7 @@
 <html>
     <head>
-    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}ajax_csrf.js"></script>
     </head>
 
     <body>
