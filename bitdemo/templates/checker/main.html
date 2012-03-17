@@ -1,0 +1,132 @@
+<html>
+<head>
+    <title>main page!</title>
+</head>
+<body bgcolor="#339955">
+	<p>
+    <h2>{{w}}</h2>
+	<h4 align='right'>
+	{%if request.user.is_authenticated%}
+    <a href="{%url logout%}">LogOut</a> 
+    {%else%}<a href="{%url login%}">LogIn</a>  |  
+    <a href="{%url register%}">Regist</a>   
+    {%endif%}
+	</h4>
+	</p>
+    <hr/>
+	
+	<!- routine->
+    <p>
+	{%if request.user.is_authenticated%}
+	<h4 align='center'>routines:</h3>	
+	{% if todo_list %}
+	<hr/>
+	routines to be done:
+    <ul>
+    {% for rt in todo_list %}
+        <li>
+		<a href="/routine/{{rt.id}}/">{{ rt.title }}</a>  |  
+		<a href="/routine/{{rt.id}}/done">done?</a>  |  
+		<a href="/routine/{{rt.id}}/remove">remove?</a>
+		<hr/>
+		<a id="rlink{{rt.id}}" href="#rlink{{rt.id}}">{{ rt.title }}</a>  |  
+		<a href="/routine/{{rt.id}}/done">done?</a>  |  
+		<a href="/routine/{{rt.id}}/remove">remove?</a>
+		<br>		
+		<div id="rdetail{{rt.id}}">    </div>
+		</li>
+    {% endfor %}
+    </ul>
+	{% else %}
+    <p>No routines to be done.</p>
+	{% endif %}
+	
+	{% if done_list %}
+	<hr/>routines done:
+    <ul>
+    {% for rt in done_list %}
+        <li>
+		<a href="/routine/{{rt.id}}/">{{ rt.title }}</a>  |  
+		<a href="/routine/{{rt.id}}/undone">undone?</a>  |  
+		<a href="/routine/{{rt.id}}/remove">remove?</a>
+		
+		</li>
+    {% endfor %}
+    </ul>
+	{% else %}
+    <p>No routines that has been done.</p>
+	{% endif %}
+	
+	{% endif %}
+    </p>
+	
+	<hr/>
+	
+	<!- casething->
+    <p>
+	{%if request.user.is_authenticated%}
+	<h4 align='center'>casething:</h3>	
+	
+	{% if case_list %}
+	<hr/>
+	casething to be done:
+    <ul>
+	{% for case in case_list %}
+		Tags:{{case.name}}
+		{% for casething in case.casething_set.all%}
+		<li>
+		<a href="/casething/{{casething.id}}/">{{ casething.title }} </a>- - - - - - - - - -   
+		<a href="/casething/{{casething.id}}/remove">remove?</a>
+		</li>
+		{% endfor%}
+		<br/>
+	{% endfor%}
+    </ul>
+	{% else %}
+    <p>No casething to be done.</p>
+	{% endif %}
+	
+	{% endif %}
+	
+	<hr/>
+	
+	<p align = 'right'>
+	{%if request.user.is_authenticated%}
+		<a href="{%url add_routine%}">Add routine</a>
+		<a href="{%url add_casething%}">Add casething</a>
+    {%endif%}
+    </p>
+	
+	
+	<img src="/medias/img/snail.jpg"  alt="snails..." />
+	<br/>
+	<img src="/medias/img/success_baby.jpg"  alt="success baby" width="60" height="70" align='center'/>
+	
+	<script>
+	$(document).ready(
+		$('#get_link').click(function() {
+			
+			$.ajax({
+				type:'get',  //request的类型，（get 默认，post，put，delete）
+				url:'/update/', //请求的页面的地址
+				dataType: 'json',  //服务器端传回来的数据格式（xml，json，script，html）
+				data: '', //要传到服务器端的数据，自动转换为String，object必须是key/value对
+				success: function(data) {
+					var items = [];
+					$.each(data, function(key, val) {
+						items.push(key+" " + val);
+					});
+					$('#get_data').html(items.join(","));
+				}
+				/*
+				error: function() {
+						alert("Sorry, The requested property could not be found.");
+					}
+					*/
+			})
+		})
+	)
+	</script>
+	
+</body>
+</html>
