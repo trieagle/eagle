@@ -10,7 +10,7 @@ import datetime
 def fetch_lists(user_id):
     day_task, week_task, month_task, year_task, task_done = [], [], [], [], []
     all_tasks = task_model.task.objects.filter(task_onwer=user_id)
-    #很糟糕的代码呢，能以多态的方式重构码？
+    #很糟糕的代码呢，能以多态的方式重构吗？
     for task_item in all_tasks:
         if task_item.mode == task_model.ONCE_TASK:
             if task_item.is_done():
@@ -46,8 +46,15 @@ def home(request):
         return render_to_response('login.html',
                                   {},
                                   context_instance=RequestContext(request))
+
     day_task, week_task, month_task, year_task, task_done = fetch_lists(
         request.user.id)
-    
+    tasks_list = {"day":day_task,
+                  "week":week_task,
+                  "month":month_task,
+                  "year":year_task,
+                  "done":task_done}
 
-        
+    return render_to_response('account.html',
+                              {"tasks_list", task_list},
+                              context_instance=RequestContext(request))

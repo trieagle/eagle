@@ -1,7 +1,26 @@
 <html>
 <head>
-	<title>{{ }}'s home</title>
+	<title>{{ request.user.username }}'s home</title>
 </head>
 <body>
-</body>
+    {% for mode, tasks in tasks_list.items() %}
+    <div id={{mode}}> <!--filter-->
+        <ol>
+        {% for atask in tasks %}
+        <li id={{aday.id}}> <!--bug: id conflict-->
+            <a>atask.title</a>
+            <button type="button">done</button>
+            <span>
+                <textarea>{{atask.detail}}</textarea>
+                <a>{{atask.priority}}</a>
+                {% for t in atask.tag.all() %}
+                <a id={{t.id}}>{{t.name}}</a>
+                {% endfor %}
+            </span>
+        </li>
+        {% endif %}
+        </ol>
+	</div>
+    {% endfor %}
+    </body>
 </html>
