@@ -38,12 +38,6 @@ def fetch_lists(user_id):
                 year_task.append(task_item)
     return day_task, week_task, month_task, year_task, task_done                
 
-[<Task: 2test 2 >, <Task: 5test 2 >]
- []
- []
- [] 
-[<Task: 1test 1>, <Task: 4test 1>, <Task: 2test 2 >, <Task: 5test 2 >, <Task: 3test 3 >, <Task: 6test 3 >]
-
 
 
 def home(request):
