@@ -1,4 +1,5 @@
 #coding=utf-8
+
 import re
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
@@ -50,14 +51,14 @@ def _login(request,Name,password):
     '''登陆核心方法'''
     ret=False
     #正则表达式匹配，用邮箱取得用户名
-    if re.match('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$',Name):
-        print "Email match"
+    if re.match('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$', Name):
         try:
-            temp = User.objects.get(country="U.S.A.")
+            temp = User.objects.get(email = Name)
         except ( User.MultipleObjectsReturned, User.DoesNotExist ):
-            ret = False
+            messages.add_message(request, messages.INFO, _(u'用户不存在'))
+            return False
         else:
-            Name = temp.name            
+            Name = temp.username            
     user=authenticate(username=Name,password=password)
     if user:
         if user.is_active:
@@ -66,7 +67,7 @@ def _login(request,Name,password):
         else:
             messages.add_message(request, messages.INFO, _(u'用户没有激活'))
     else:
-        messages.add_message(request, messages.INFO, _(u'用户不存在'))
+        messages.add_message(request, messages.INFO, _(u'用户不存在或密码错误'))
     return ret
     
 def logout(request):
