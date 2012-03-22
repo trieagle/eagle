@@ -4,7 +4,8 @@ from django.conf.urls.defaults import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     # Examples:
     # url(r'^$', 'eagle.views.home', name='home'),
     # url(r'^eagle/', include('eagle.foo.urls')),
@@ -21,4 +22,7 @@ urlpatterns = patterns('',
     url(r'^update/$', 'ajax.views.update'),
     url(r'^update2/$', 'ajax.views.update2'),
     url(r'^update3/$', 'ajax.views.update3'),
+
+    url(r'^account/', include(account.urls)),
+    url(r'^task/', include(task.urls)),
 )
