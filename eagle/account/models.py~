@@ -11,7 +11,7 @@ friends followers
 
 """
 class Account(models.Model):
-    user = models.ForeignKey(models.User, unique=True)
+    user = models.ForeignKey(auth_models.User, unique=True)
     portrait = models.ImageField('your portraint', upload_to="img/portrait")
     GENDER_CHOICES = (
         ('M', 'Male'),

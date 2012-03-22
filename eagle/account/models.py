@@ -28,5 +28,11 @@ class Account(models.Model):
     followers = models.ManyToManyField('self', blank=True)
 
 
+    def __unicode__(self):
+	return self.title
+    class Meta:
+        ordering = ['user']
+
+
 
 # Create your models here.
