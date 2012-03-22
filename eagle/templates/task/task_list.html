@@ -1,0 +1,37 @@
+<!--{% if snippets %}
+    {% for snippet in snippets %}
+    <div class="latest-snippets clearfix">
+        <h3><a href="{% url snippets_read snippet.pk %}-{{snippet.title|slugify}}">{{snippet.title}}</a></h3>
+        <p>{{snippet.description|truncatewords:16}}&nbsp;</p>
+        <p class="snippet-meta">Added by <a href="{% url accounts_user snippet.author %}">{{snippet.author}}</a>
+        {{snippet.created_date|timesince}} ago</p>
+    </div>
+    {% endfor %}
+    {% endif %}-->
+
+{% for mode, tasks in tasks_list.items %}
+    <div id="new-task">
+    </div>
+    <div id={{mode}}> <!--filter-->
+        <ul>
+        {% for atask in tasks %}
+        <li id={{aday.id}}> <!--bug: id conflict-->
+            <p>
+                <a>{{atask.title}}</a>
+                <button type="button">done</button>
+            </p>
+            <div>
+                <textarea>{{atask.detail}}</textarea>
+                <a>{{atask.priority}}</a>
+                {% for t in atask.tag.all %}
+                    <a id={{t.id}}>{{t.name}}</a>
+                {% endfor %}
+            </div>
+        </li>
+        {% endfor %}
+        </ul>
+        
+	</div>
+	<hr>
+{% endfor %}
+
