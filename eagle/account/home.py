@@ -42,8 +42,9 @@ def fetch_lists(user_id):
 
 def home(request):
 
-    day_task, week_task, month_task, year_task, task_done = fetch_lists(2)
-    print day_task, week_task, month_task, year_task, task_done
+    day_task, week_task, month_task, year_task, task_done = fetch_lists(
+        request.user.id)
+    #print day_task, week_task, month_task, year_task, task_done
     
     tasks_list = {"day":day_task,
                   "week":week_task,

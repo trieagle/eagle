@@ -31,12 +31,14 @@ class Task(models.Model):
     privacy = models.IntegerField(default=0)
 
     def is_expired(self):
-        return False
+        return datetime.datetime.now() < self.begin_time and \
+            datetime.datetime.now() > self.end_time
     def is_done(self):
         return True
 
     def __unicode__(self):
         return str(self.id) + self.title
+
     class Meta:
         ordering = ['title']
     class Admin:
