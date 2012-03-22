@@ -3,7 +3,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib import messages
-
 from django.contrib.auth import authenticate, login as auth_login ,logout as auth_logout
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
@@ -63,4 +62,4 @@ def _login(request,username,password):
 def logout(request):
     '''注销视图'''
     auth_logout(request)
-    return HttpResponseRedirect('/account/home/')
+    return HttpResponseRedirect('/account/login/')

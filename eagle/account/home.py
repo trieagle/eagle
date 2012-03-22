@@ -6,6 +6,8 @@ from account.models import Account
 from task import models as task_model
 import datetime
 
+from account.models import Account
+
 
 
 def fetch_lists(user_id):
