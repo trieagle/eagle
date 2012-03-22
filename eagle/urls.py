@@ -18,6 +18,7 @@ urlpatterns = patterns(
     url(r'^home$','account.home.home'),
     url(r'^$ajax', 'ajax.views.ajax'),
 
+    ## for test
     url(r'^ajax/$', 'ajax.views.ajax'),
     url(r'^update/$', 'ajax.views.update'),
     url(r'^update2/$', 'ajax.views.update2'),
