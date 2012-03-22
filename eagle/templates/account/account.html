@@ -8,8 +8,9 @@
         <ul>
         {% for atask in tasks %}
         <li id={{aday.id}}> <!--bug: id conflict-->
-            <a>{{atask.title}}</a>
+            <a href="#">{{atask.title}}</a>
             <button type="button">done</button>
+	    <br>
             <span>
                 <textarea>{{atask.detail}}</textarea>
                 <a>{{atask.priority}}</a>

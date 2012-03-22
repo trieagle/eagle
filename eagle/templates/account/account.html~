@@ -8,7 +8,7 @@
         <ul>
         {% for atask in tasks %}
         <li id={{aday.id}}> <!--bug: id conflict-->
-            <a>{{atask.title}}</a>
+            <a href="#">{{atask.title}}</a>
             <button type="button">done</button>
             <span>
                 <textarea>{{atask.detail}}</textarea>
@@ -18,7 +18,7 @@
                 {% endfor %}
             </span>
         </li>
-	<br><br><br>
+	
         {% endfor %}
         </ul>
 	</div>
