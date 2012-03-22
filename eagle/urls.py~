@@ -27,3 +27,5 @@ urlpatterns = patterns(
     url(r'^task/', include('eagle.task.urls')),
 )
 
+## move to account/urls.py
+

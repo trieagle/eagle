@@ -7,7 +7,7 @@
     <table border="0" cellpadding="0" >
         {{form.as_table}}        
     </table>
-    <p> <a href="/account/login/">登陆</a> <a href="/account/index/">返回首页</a> <input type="submit" value="注册"/></p>
+    <p> <a href="/accounts/login/">登陆</a> <a href="/account/index/">返回首页</a> <input type="submit" value="注册"/></p>
     </form>
 </body>
 </html>

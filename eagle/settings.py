@@ -150,7 +150,3 @@ LOGGING = {
         },
     }
 }
-
-AUTHENTICATION_BACKENDS = (
-    'account.auth_backends.AccountModelBackend',
-)
