@@ -4,23 +4,27 @@
     <meta charset="utf-8" />
     <title>{% block title%}!!!Change the title!!!{% endblock%}{% if home_page %}Code Snippets{% endif %}{% if home_page %} |{% endif %} Snippify.me</title>
     <link rel="shortcut icon" href="{{MEDIA_URL}}images/favico.ico" />
-    <link rel="search" type="application/opensearchdescription+xml" title="Snippify.me" href="{% url search_plugin %}" />
-    <link rel="stylesheet" media="all" charset="utf-8" href="{{MEDIA_URL}}css/base.css"/>
-    <link rel="alternate" type="application/rss+xml" href="{% url feeds 'latest' %}" title="Latest snippets feed">
+    <link rel="stylesheet" media="all" charset="utf-8" href="{{STATIC_URL}}css/base.css"/>
     {% block head %}{% endblock %}
 </head>
 <body>
 <div id="wrapper">
      <div id="header" class="clearfix">
         <div id="logo">
-            <a href="/">snippify.me</a>
+            <a href="/">Eagle</a>
         </div>
         <div class="menubar clearfix">
             <ul id="primary-navigation">
                 {% if user.is_authenticated %}
-                <li><a class="first" href="/accounts/profile">{{user.username}}</a></li>
-                <li><a href="/create">Add a snippet</a></li>
-                <li><a href="/account/signout">Logout</a></li>
+                <li>
+                    <a class="first" href="/accounts/profile">{{user.username}}</a>
+                </li>
+                <li>
+                    <a href="/create">Add a snippet</a>
+                </li>
+                <li>
+                    <a href="/account/signout">Logout</a>
+                </li>
                 {% else %}
                     <li class="first" id="login"><a href="/account/signin">Login / Register</a></li>
                 {% endif %}
@@ -29,9 +33,9 @@
     </div>
 
     <div id="main" class="{% if home_page %}intro {% endif %}{% if sidebared %}sidebared {% endif %}clearfix">
-        {% if flash %}<div id="flash_message" class="{% if flash.1 %}{{flash.1}}{% else %}info{% endif %}">{{flash.0}}</div>{% endif %}
         <div id="main-content">
-            {% block content %}{% endblock %}
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
 
@@ -44,10 +48,10 @@
         </ul>
     </div>
 </div>
-<script>var MEDIA_URL = '{{MEDIA_URL}}';</script>
+<!--<script>var MEDIA_URL = '{{MEDIA_URL}}';</script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script>!window.jQuery && document.write(unescape('%3Cscript src="{{MEDIA_URL}}js/jquery.min.js"%3E%3C/script%3E'))</script>
 {% block extra_scripts %}{% endblock %}
-<script type="text/javascript" src="{{MEDIA_URL}}js/base.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/base.js"></script>-->
 </body>
 </html>

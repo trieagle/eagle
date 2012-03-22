@@ -1,3 +1,5 @@
 *.swp
 eagle/PYSMELLTAGS*
 *.pyc
+*~
+eagle/static/images/*
