@@ -5,6 +5,8 @@ from django.template import RequestContext
 from task import models as task_model
 import datetime
 
+from account.models import Account
+
 
 
 def fetch_lists(user_id):
@@ -41,9 +43,10 @@ def fetch_lists(user_id):
 
 
 def home(request):
-
+    print request.user, '=================================='
+    account = Account.objects.filter(user=request.user)[0]
     day_task, week_task, month_task, year_task, task_done = fetch_lists(
-        request.user.id)
+        account.id)
     #print day_task, week_task, month_task, year_task, task_done
     
     tasks_list = {"day":day_task,

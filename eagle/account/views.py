@@ -63,4 +63,4 @@ def _login(request,username,password):
 def logout(request):
     '''注销视图'''
     auth_logout(request)
-    return HttpResponseRedirect('/account/home/')
+    return HttpResponseRedirect('/account/login/')
