@@ -23,6 +23,7 @@ urlpatterns = patterns(
     url(r'^update2/$', 'ajax.views.update2'),
     url(r'^update3/$', 'ajax.views.update3'),
 
+    url(r'^$', 'eagle.account.views.index'),
     url(r'^account/', include('eagle.account.urls')),
     url(r'^task/', include('eagle.task.urls')),
 )
