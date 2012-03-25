@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from eagle.account.models import Account
 from forms import RegisterForm,LoginForm
 import home
+import re
  
 def index(request):
     if request.user.is_authenticated():
@@ -47,10 +48,19 @@ def login(request):
     template_var["form"]=form        
     return render_to_response("account/login.html",template_var,context_instance=RequestContext(request))
     
-def _login(request,username,password):
+def _login(request,Name,password):
     '''登陆核心方法'''
     ret=False
-    user=authenticate(username=username,password=password)
+    #正则表达式匹配，用邮箱取得用户名
+    if re.match('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$', Name):
+        try:
+            temp = User.objects.get(email = Name)
+        except ( User.MultipleObjectsReturned, User.DoesNotExist ):
+            messages.add_message(request, messages.INFO, _(u'用户不存在'))
+            return False
+        else:
+            Name = temp.username            
+    user=authenticate(username=Name,password=password)
     if user:
         if user.is_active:
             auth_login(request,user)
@@ -58,7 +68,7 @@ def _login(request,username,password):
         else:
             messages.add_message(request, messages.INFO, _(u'用户没有激活'))
     else:
-        messages.add_message(request, messages.INFO, _(u'用户不存在'))
+        messages.add_message(request, messages.INFO, _(u'用户不存在或密码错误'))
     return ret
     
 def logout(request):
