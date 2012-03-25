@@ -12,7 +12,9 @@ from forms import RegisterForm,LoginForm
 import home
  
 def index(request):
-    return home.home(request)   
+    if request.user.is_authenticated():
+    	return home.home(request)  
+    return login(request) 
 
 def register(request):
     '''注册视图'''
@@ -29,7 +31,7 @@ def register(request):
 	    account = Account(user = user_obj)
 	    account.save()		
             _login(request,username,password) #注册完毕 直接登陆
-            return HttpResponseRedirect("/account/home/")    
+            return HttpResponseRedirect("/account/index/")    
     template_var["form"]=form        
     return render_to_response("account/register.html",template_var,context_instance=RequestContext(request))
     
@@ -41,7 +43,7 @@ def login(request):
         form=LoginForm(request.POST.copy())
         if form.is_valid():
             _login(request,form.cleaned_data["username"],form.cleaned_data["password"])
-            return HttpResponseRedirect("/account/home/")
+            return HttpResponseRedirect("/account/index/")
     template_var["form"]=form        
     return render_to_response("account/login.html",template_var,context_instance=RequestContext(request))
     

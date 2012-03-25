@@ -17,16 +17,16 @@
             <ul id="primary-navigation">
                 {% if user.is_authenticated %}
                 <li>
-                    <a class="first" href="/accounts/profile">{{user.username}}</a>
+                    <a class="first" href="/account/userinfo/">{{user.username}}</a>
                 </li>
                 <li>
-                    <a href="/create">Add a snippet</a>
+                    <a href="/task/create/">Add a task</a>
                 </li>
                 <li>
-                    <a href="/account/signout">Logout</a>
+                    <a href="/account/logout/">Logout</a>
                 </li>
                 {% else %}
-                    <li class="first" id="login"><a href="/account/signin">Login / Register</a></li>
+                    <li class="first" id="login"><a href="/account/login/">Login / Register</a></li>
                 {% endif %}
             </ul>
         </div>

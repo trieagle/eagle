@@ -1,0 +1,4 @@
+$(document).ready(
+	$('#get_link').click(function() {
+		$.ajax({
+			type:'get',  //request

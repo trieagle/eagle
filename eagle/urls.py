@@ -15,8 +15,8 @@ urlpatterns = patterns(
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^home$','account.home.home'),
-    url(r'^$ajax', 'ajax.views.ajax'),
+    
+
 
     ## for test
     url(r'^ajax/$', 'ajax.views.ajax'),
@@ -25,6 +25,7 @@ urlpatterns = patterns(
     url(r'^update3/$', 'ajax.views.update3'),
 
     url(r'^$', 'eagle.account.views.index'),
+    url(r'^index/$','account.views.index'),
     url(r'^account/', include('eagle.account.urls')),
     url(r'^task/', include('eagle.task.urls')),
 )
