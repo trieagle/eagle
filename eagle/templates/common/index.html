@@ -1,6 +1,10 @@
 {% extends "base.html" %}
+
 {#{% load taggit_extras %}#}
-{% block title%}{% endblock%}
+
+{% block title%}
+{% endblock%}
+
 {% block extra_scripts %}
 <script src="{{MEDIA_URL}}js/swfobject.js"></script>
 {% endblock %}
@@ -19,10 +23,14 @@
     </div>
 
     <div class="right-box box-container clearfix">
-        <div class="mood-diary">
+        <div class="boxed clearfix">
+		<h2>mood-diaries</h2>
+		{% include "task/mood_diary.html" %}
         </div>
 
-        <div class="digg">
+        <div class="boxed clearfix">
+		<h2>digg</h2>
+		{% include "task/digg.html" %}
         </div>
 
         <div class="boxed clearfix">

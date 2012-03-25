@@ -44,7 +44,7 @@ def fetch_lists(user_id):
 
 
 def home(request):
-    account = Account.objects.filter(user=request.user)[0]
+    account = Account.objects.get(user=request.user)
     day_task, week_task, month_task, year_task, task_done = fetch_lists(
         account.id)
     #print day_task, week_task, month_task, year_task, task_done
