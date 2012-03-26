@@ -1,6 +1,6 @@
 <html>
     <head>
-    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
     </head>
 
@@ -9,14 +9,16 @@
 	
 	
         <a id="get_link" href='#'>get link</a>
-        <div id="get_data"></div>
+        <div id="get_data" class="show-res"></div>
         
-		<hr><br>
-		 <a id="post_link" href='#'>post link</a>
-        <div id="post_data"></div>
+	<hr><br>
+
+	<a id="post_link" href='#'>post link</a>
+        <div id="post_data" class="show-res"></div>
 		
 		
-    <script type="text/javascript" src="{{STATIC_URL}}mine.js">
+    	<script type="text/javascript" src="{{STATIC_URL}}js/mine.js">
 	</script>
+
     </body>
 </html>

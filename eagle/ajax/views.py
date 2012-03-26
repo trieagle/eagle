@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 
 def ajax(request):
-    return render_to_response('ajax.html',
+    return render_to_response('ajax/ajax.html',
                               {},
                               context_instance=RequestContext(request))
 
