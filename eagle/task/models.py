@@ -8,7 +8,6 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
-
 TAG_TASK, ONCE_TASK, DAY_TASK, WEEK_TASK, MONTH_TASK, YEAR_TASK = range(6)
 
 class Task(models.Model):
@@ -33,6 +32,7 @@ class Task(models.Model):
     def is_expired(self):
         return datetime.datetime.now() < self.begin_time and \
             datetime.datetime.now() > self.end_time
+	
     def is_done(self):
         return True
 
@@ -41,13 +41,16 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['title']
-    class Admin:
-        pass
 
+    def in_today(a_task):
+        return a_task.year == datetime.datetime.now().year and \
+            a_task.month == datetime.datetime.now().month and \
+            a_task.day == datetime.datetime.now().day
 
-def in_today(a_task):
-    return a_task.year == datetime.datetime.now().year and \
-        a_task.month == datetime.datetime.now().month and \
-        a_task.day == datetime.datetime.now().day
-
-# Create your models here.
+class Status(models.Model):
+    task = models.ForeignKey(Task)
+    rate = models.IntegerField(default=5)
+    time = models.DateTimeField(default=datetime.datetime.now)
+    
+   class Meta:
+        ordering = ['-time']

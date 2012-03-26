@@ -7,20 +7,21 @@
         {{snippet.created_date|timesince}} ago</p>
     </div>
     {% endfor %}
-    {% endif %}-->
+    {% endif %}
+-->
 
 {% for mode, tasks in tasks_list.items %}
     <div id="new-task">
     </div>
-    <div id={{mode}}> <!--filter-->
+    <div id={{mode}} class="task-div"> <!--filter-->
         <ul>
         {% for atask in tasks %}
         <li id={{aday.id}}> <!--bug: id conflict-->
-            <p>
-                <a href="#" class="task-title">{{atask.title}}</a>
-                <button type="button">done</button>
+            <p class="task-title-op">
+                <a href="#" class="task-title" >{{atask.title}}</a>
+                <a class="task-op"></a>
             </p>
-            <div class="task-info">
+            <div class="task-info" >
                 <textarea>{{atask.detail}}</textarea>
                 <a>{{atask.priority}}</a>
                 {% for t in atask.tag.all %}
