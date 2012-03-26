@@ -17,10 +17,10 @@
         {% for atask in tasks %}
         <li id={{aday.id}}> <!--bug: id conflict-->
             <p>
-                <a>{{atask.title}}</a>
+                <a href="#" class="task-title">{{atask.title}}</a>
                 <button type="button">done</button>
             </p>
-            <div>
+            <div class="task-info">
                 <textarea>{{atask.detail}}</textarea>
                 <a>{{atask.priority}}</a>
                 {% for t in atask.tag.all %}
@@ -34,4 +34,8 @@
 	</div>
 	<hr>
 {% endfor %}
+
+
+
+
 

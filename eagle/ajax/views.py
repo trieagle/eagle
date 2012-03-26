@@ -25,9 +25,7 @@ def update2(request):
         req = simplejson.loads(request.raw_post_data)
         uname=req['username']
         user = User.objects.filter(username=uname) ##result is queryset
-        print type(user),user
         data = serializers.serialize('json',user) ##only serialize queryset
-##        print data    
         minetype = "application/javascript, charset=utf8"
         return HttpResponse(data,minetype)
     

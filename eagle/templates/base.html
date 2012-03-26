@@ -6,16 +6,16 @@
           {% block title%}!!!Change the title!!!{% endblock%}
           {% if home_page %}??{% endif %}
     </title>
-    <link rel="shortcut icon" href="{{MEDIA_URL}}images/favico.ico" />
+    <link rel="shortcut icon" href="{{STATIC_URL}}img/eagle.ico" />
     <link rel="stylesheet" media="all" charset="utf-8" href="{{STATIC_URL}}css/base.css"/>
-    {% block head %}
-    {% endblock %}
+  	{% block head %}
+	{% endblock %}
 </head>
 <body>
 <div id="wrapper">
      <div id="header" class="clearfix">
         <div id="logo">
-            <a href="/">Eagle</a>
+            <a href="{{STATIC_URL}}img/eagle.ico">Eagle</a>
         </div>
         <div class="menubar clearfix">
             <ul id="primary-navigation">
@@ -52,10 +52,11 @@
         </ul>
     </div>
 </div>
-<!--<script>var MEDIA_URL = '{{MEDIA_URL}}';</script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-<script>!window.jQuery && document.write(unescape('%3Cscript src="{{MEDIA_URL}}js/jquery.min.js"%3E%3C/script%3E'))</script>
-{% block extra_scripts %}{% endblock %}
-<script type="text/javascript" src="{{MEDIA_URL}}js/base.js"></script>-->
+
+<!-- 加载js 开始是放在body的最后 -->
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/base.js"></script>
+	{% block extra_scripts %}{% endblock %}
 </body>
 </html>
