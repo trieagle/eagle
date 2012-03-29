@@ -16,17 +16,22 @@
     <div id={{mode}} class="task-div"> <!--filter-->
         <ul>
         {% for atask in tasks %}
-        <li id={{aday.id}}> <!--bug: id conflict-->
-            <p class="task-title-op">
-                <a href="#" class="task-title" >{{atask.title}}</a>
-                <a class="task-op"></a>
-            </p>
+        <li id={{aday.id}}>
+            <a href="#" class="task-title" >{{atask.title}}</a>
+			<div class="task-rate"><a>Done?</a></div>
             <div class="task-info" >
-                <textarea>{{atask.detail}}</textarea>
-                <a>{{atask.priority}}</a>
-                {% for t in atask.tag.all %}
+                <textarea class="task-detail">{{atask.detail}}</textarea><br>
+                <a  class="task-priority">{{atask.priority}}</a>
+                <div  class="task-detail">
+					{% for t in atask.tag.all %}
                     <a id={{t.id}}>{{t.name}}</a>
-                {% endfor %}
+                	{% endfor %}
+				</div>
+				<div  class="task-op">
+				<button value="update">update</button>
+				<button value="cancel">cancel</button>
+				</div>
+				<hr>
             </div>
         </li>
         {% endfor %}
