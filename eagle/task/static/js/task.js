@@ -31,10 +31,13 @@ $(document).ready(function() {
         taskTitle.hide().after(
             '<input class="task-title-input" value="' 
             + taskTitle.html() + '" >');
+        taskDetail = task.find('.task-detail');
+        taskDetail.hide().after(
+            '<input class="task-detail-input" value="' 
+            + taskDetail.html() + '" >');
 
     }).end().find('.delete').click(function() {
         task = $(this).parent().parent().parent();
         task.remove();
     });
-
 });
