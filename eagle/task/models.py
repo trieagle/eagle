@@ -29,11 +29,11 @@ class Task(models.Model):
     tag = models.ManyToManyField(Tag, blank=True)
     privacy = models.IntegerField(default=0)
 
-    def is_expired(self):
-        return datetime.datetime.now() < self.begin_time and \
-            datetime.datetime.now() > self.end_time
-	
-    def is_done(self):
+    def active(self):
+        return datetime.datetime.now() >= self.begin_time and \
+            datetime.datetime.now() <= self.end_time
+
+    def done(self):
         return True
 
     def __unicode__(self):
