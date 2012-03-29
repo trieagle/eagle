@@ -36,6 +36,6 @@ def home(request):
                   "year": year_task,
                   "done": task_done}
 
-    return render_to_response('common/index.html',
+    return render_to_response("common/index.html",
                               {"tasks_list": tasks_list},
                               context_instance=RequestContext(request))
