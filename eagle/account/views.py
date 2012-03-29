@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from eagle.account.models import Account
-from forms import RegisterForm,LoginForm
+from forms import RegisterForm,LoginForm,UserForm
 import home
 import re
  
@@ -33,7 +33,8 @@ def register(request):
 	    account.save()		
             _login(request,username,password) #注册完毕 直接登陆
             return HttpResponseRedirect("/account/index/")    
-    template_var["form"]=form        
+    template_var["form"]=form
+    template_var["home_page"] = False
     return render_to_response("account/register.html",template_var,context_instance=RequestContext(request))
     
 def login(request):
@@ -45,7 +46,8 @@ def login(request):
         if form.is_valid():
             _login(request,form.cleaned_data["username"],form.cleaned_data["password"])
             return HttpResponseRedirect("/account/index/")
-    template_var["form"]=form        
+    template_var["form"]=form
+    template_var["home_page"] = False
     return render_to_response("account/login.html",template_var,context_instance=RequestContext(request))
     
 def _login(request,Name,password):
@@ -75,3 +77,21 @@ def logout(request):
     '''注销视图'''
     auth_logout(request)
     return HttpResponseRedirect('/account/login/')
+
+def userinfo(request):
+    '''修改用户信息视图'''
+    template_var={}
+    form = UserForm()
+    if request.method ==  'POST':
+        form = UserForm(request.POST.copy())
+        if form.is_valid():
+            User.objects.filter( id = request.user.id ).update( username = form.cleaned_data["username"],
+                                                            email = form.cleaned_data["email"])
+    else :
+        form = UserForm( initial = {'username':request.user.username ,'email':request.user.email})
+
+    template_var["form"] = form
+    template_var["home_page"] = False
+    return render_to_response("account/userinfo.html",template_var,context_instance=RequestContext(request))
+        
+    

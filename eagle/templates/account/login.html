@@ -1,10 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-<head>
-    <title>Account Login</title>
-</head>
-<body>
-    {% if messages %}
+﻿
+{% extends "base.html" %}
+
+{% block title%}Account Login{% endblock%}
+
+{% block content %}
+{% if messages %}
 <ul>
     {% for message in messages %}
     <li>{{ message }}</li>
@@ -17,5 +17,4 @@
     </table>
     <p> <a href="/account/register/">注册</a> <a href="/account/index/">返回首页</a> <input type="submit" value="登录"/></p>
     </form>
-</body>
-</html>
+{% endblock %}

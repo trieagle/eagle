@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,8 +14,9 @@
 <body>
 <div id="wrapper">
      <div id="header" class="clearfix">
-        <div id="logo">
-            <a href="{{STATIC_URL}}img/eagle.ico">Eagle</a>
+        <div id="logo" >
+         <!-- 尚有错误 -->
+		<a href="/account/index/"><img src ="{{STATIC_URL}}img/eagle.ico" > </img></a>
         </div>
         <div class="menubar clearfix">
             <ul id="primary-navigation">
@@ -53,7 +54,7 @@
     </div>
 </div>
 
-<!-- 加载js 开始是放在body的最后 -->
+
 	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/base.js"></script>
