@@ -52,5 +52,5 @@ class Status(models.Model):
     rate = models.IntegerField(default=5)
     time = models.DateTimeField(default=datetime.datetime.now)
     
-   class Meta:
+    class Meta:
         ordering = ['-time']
