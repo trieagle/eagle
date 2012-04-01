@@ -1,4 +1,5 @@
 function Task(taskElem) {
+  this.task = taskElem;
   this.title = taskElem.find('.task-title');
   this.titleInput = taskElem.find('.task-title-input');
   this.detail = taskElem.find('.task-detail');
@@ -26,7 +27,16 @@ Task.prototype.toggleDetail = function() {
 };
 
 Task.prototype.toggleTags = function() {
-  //TODO
+  if (this.tags.is(':visible')) {
+    //TODO
+    var tagList = [];
+    this.tags.children().each(function() {
+      tagList.push($(this).text());
+    });
+    this.tags.hide().next().val(tagList.join()).show();
+  } else {
+    this.tags.show().next().hide();
+  }
 };
 
 Task.prototype.toggleOption = function() {
@@ -38,9 +48,28 @@ Task.prototype.toggleOption = function() {
 };
 
 Task.prototype.toggleAll = function() {
-    this.toggleTitle();
-    this.toggleDetail();
-    this.toggleOption();
+  this.toggleTitle();
+  this.toggleDetail();
+  this.toggleTags();
+  this.toggleOption();
+};
+
+Task.prototype.getTagList = function() {
+  //fixme
+  var tagText = this.tagsInput.val();
+  var tagList = tagText.split(' ');
+};
+
+Task.prototype.getID = function() {
+  return this.task.attr('id');
+};
+
+Task.prototype.getTitleInput = function() {
+  return this.titleInput.val();
+};
+
+Task.prototype.getDetailInput = function() {
+  return this.detailInput.val();
 };
 
 $(document).ready(function() {
@@ -52,6 +81,7 @@ $(document).ready(function() {
   //hide
   $('.task-title-input').hide();
   $('.task-detail-input').hide();
+  $('.task-tags-input').hide();
   $('.edit-op').hide();
 
   //set action for task-op 
@@ -72,8 +102,11 @@ $(document).ready(function() {
     task.toggleAll();
 
     var taskObj = {
-      title: task.find('.task-title-input').value(),
-      detail: task.find('.task-detail-input').value(),
+      id: task.getID(),
+      title: task.getTitleInput(),
+      detail: task.getDetailInput(),
+      priority: 1,
+      tags: task.getTagList()
     };
 
     $.ajax({
