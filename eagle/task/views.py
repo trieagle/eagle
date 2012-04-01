@@ -1,24 +1,25 @@
 #coding=utf-8
 
-from django.template import Context, loader, RequestContext
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response, get_object_or_404
-from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.utils import simplejson
 
-import datetime
+from eagle.task.models import Task, Status
 
-## combine add and update operation
+def add_task(request):
+	pass
+
 def update_task(request):
 	if request.is_ajax():
         req = simplejson.loads(request.raw_post_data)
-        task = Task.objects.get(id=req['task_id'])
-		
+        ##task = Task.objects.get_object_or_create(id=req['task_id'])
+		task = Task.objects.get(id=req['task_id'])
 		if task
-			## tobe completed
+			task.title = req['title']
+			task.detail = req['detail']
+			task.save()
 			data = serializers.serialize('json',[task]) ##only serialize queryset
         	minetype = "application/javascript, charset=utf8"
         	return HttpResponse(data,minetype)
-    
     return HttpResponse('error:not ajax request')
 
 ##only set task.alive = false
@@ -50,8 +51,8 @@ def done_task(request):
     return HttpResponse('error:not ajax request')
 
 def undone_task(request):
-   if request.is_ajax():
-        req = simplejson.loads(request.raw_post_data)
+	if request.is_ajax():
+		req = simplejson.loads(request.raw_post_data)
         _task = Task.objects.get(id=req['task_id'])
 		status = Status.objects.filter(task=_task,rate=_rate).latest("date")
 		if status		
@@ -60,6 +61,6 @@ def undone_task(request):
         	minetype = "application/javascript, charset=utf8"
        		return HttpResponse(data,minetype)
     
-    return HttpResponse('error:not ajax request')
+	return HttpResponse('error:not ajax request')
         
     
