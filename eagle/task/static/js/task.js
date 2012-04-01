@@ -61,7 +61,7 @@ Task.prototype.getTagList = function() {
 };
 
 Task.prototype.getID = function() {
-  return this.task.attr('id');
+  return parseInt(this.task.attr('id').substring(5)); //task-123213
 };
 
 Task.prototype.getTitleInput = function() {
@@ -70,6 +70,17 @@ Task.prototype.getTitleInput = function() {
 
 Task.prototype.getDetailInput = function() {
   return this.detailInput.val();
+};
+
+Task.prototype.setTitle = function(title_) {
+  this.title.html(title_);
+};
+
+Task.prototype.setDetail = function(detail_) {
+  this.detail.html(detail_);
+};
+
+Task.prototype.setTags = function(tags_) {
 };
 
 $(document).ready(function() {
@@ -99,23 +110,28 @@ $(document).ready(function() {
   $('.edit-op').find('.confirm').click(function() {
     var taskElem = $(this).parent().parent().parent();
     var task = new Task(taskElem);
-    task.toggleAll();
 
     var taskObj = {
       id: task.getID(),
       title: task.getTitleInput(),
       detail: task.getDetailInput(),
       priority: 1,
-      tags: task.getTagList()
+      tag: task.getTagList()
     };
-
     $.ajax({
-      url: '/',
+      url: '/task/update/',
       type: 'post',
       dataType: 'json',
       data: JSON.stringify(taskObj),
       success: function(revTaskObj) {
+        revTaskObj = revTaskObj[0];
         //TODO
+        var taskId = '#task-' + revTaskObj['pk'];
+        //var task = new Task($(taskId));
+        task.setTitle(revTaskObj['fields']['title']);
+        task.setDetail(revTaskObj.fields['detail']);
+        task.setTags(revTaskObj.fields['tag']);
+        task.toggleAll();
       }
     });
   })

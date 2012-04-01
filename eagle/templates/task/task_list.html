@@ -9,13 +9,14 @@
 {% endfor %}
 {% endif %}
 -->
+{% load task_extra %}
 <div id="new-task">
 </div>
 {% for mode, tasks in tasks_list.items %}
 <div id={{mode}} class="task-div"> <!--filter-->
   <ul>
     {% for atask in tasks %}
-    <li id={{atask.id}}>
+    <li id={{atask.id|prefix:"task-"}}>
     <a href="#" class="task-title" >{{atask.title}}</a>
     <input class="task-title-input" value="">
 
@@ -28,7 +29,8 @@
       <a class="task-priority">{{atask.priority}}</a>
       <div class="task-tags">
         {% for t in atask.tag.all %}
-        <a id={{t.id}}>{{t.name}}</a>
+
+        <a class="tag">{{t.name}}</a>
         {% endfor %}
       </div>
       <input class="task-tags-input" value="">
