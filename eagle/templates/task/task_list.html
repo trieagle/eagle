@@ -1,42 +1,52 @@
 <!--{% if snippets %}
-    {% for snippet in snippets %}
-    <div class="latest-snippets clearfix">
-        <h3><a href="{% url snippets_read snippet.pk %}-{{snippet.title|slugify}}">{{snippet.title}}</a></h3>
-        <p>{{snippet.description|truncatewords:16}}&nbsp;</p>
-        <p class="snippet-meta">Added by <a href="{% url accounts_user snippet.author %}">{{snippet.author}}</a>
-        {{snippet.created_date|timesince}} ago</p>
-    </div>
-    {% endfor %}
-    {% endif %}
+{% for snippet in snippets %}
+<div class="latest-snippets clearfix">
+  <h3><a href="{% url snippets_read snippet.pk %}-{{snippet.title|slugify}}">{{snippet.title}}</a></h3>
+  <p>{{snippet.description|truncatewords:16}}&nbsp;</p>
+  <p class="snippet-meta">Added by <a href="{% url accounts_user snippet.author %}">{{snippet.author}}</a>
+  {{snippet.created_date|timesince}} ago</p>
+</div>
+{% endfor %}
+{% endif %}
 -->
 
 {% for mode, tasks in tasks_list.items %}
-    <div id="new-task">
-    </div>
-    <div id={{mode}} class="task-div"> <!--filter-->
-        <ul>
-        {% for atask in tasks %}
-        <li id={{atask.id}}>
-            <a href="#" class="task-title" >{{atask.title}}</a>
-			<div class="task-rate"><a>Done?</a></div>
-            <div class="task-info" >
-                <span class="task-detail">{{atask.detail}}</span>
-                <br>
-                <a class="task-priority">{{atask.priority}}</a>
-                <div class="task-tags">
-					{% for t in atask.tag.all %}
-                    <a id={{t.id}}>{{t.name}}</a>
-                	{% endfor %}
-				</div>
-				<div class="task-op">
-                    <button class="edit">edit</button>
-                    <button class="delete">delete</button>
-				</div>
-				<hr>
-            </div>
-        </li>
+<div id="new-task">
+</div>
+<div id={{mode}} class="task-div"> <!--filter-->
+  <ul>
+    {% for atask in tasks %}
+    <li id={{atask.id}}>
+    <a href="#" class="task-title" >{{atask.title}}</a>
+    <input class="task-title-input" value="">
+
+    <div class="task-rate"><a>Done?</a></div>
+    <div class="task-info" >
+      <span class="task-detail">{{atask.detail}}</span>
+      <input class="task-detail-input" value="">
+
+      <br>
+      <a class="task-priority">{{atask.priority}}</a>
+      <div class="task-tags">
+        {% for t in atask.tag.all %}
+        <a id={{t.id}}>{{t.name}}</a>
         {% endfor %}
-        </ul>
-	</div>
-	<hr>
+      </div>
+
+      <div class="task-op">
+        <button class="edit">edit</button>
+        <button class="delete">delete</button>
+      </div>
+      <div class="edit-op">
+        <button class="confirm">confirm</button>
+        <button class="cancel">cancel</button>
+      </div>
+
+      <hr>
+    </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<hr>
 {% endfor %}
