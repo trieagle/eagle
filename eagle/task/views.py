@@ -52,7 +52,6 @@ def done_task(request):
         data = serializers.serialize('json',[status]) ##only serialize queryset
         minetype = "application/javascript, charset=utf8"
         return HttpResponse(data,minetype)
-
     return HttpResponse('error:not ajax request')
 
 def undone_task(request):
