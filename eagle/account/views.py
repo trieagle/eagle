@@ -61,7 +61,7 @@ def _login(request,Name,password):
             messages.add_message(request, messages.INFO, _(u'用户不存在'))
             return False
         else:
-            Name = temp.username            
+            Name = temp.username
     user=authenticate(username=Name,password=password)
     if user:
         if user.is_active:
