@@ -54,6 +54,17 @@ Task.prototype.toggleAll = function() {
   this.toggleOption();
 };
 
+Task.prototype.toggleEdit = function() {
+  this.task.children().each(function() {
+    if ($(this).is(':visible')) {
+      $(this).hide();
+    } else {
+      $(this).show();
+    }
+  });
+}
+
+
 Task.prototype.getTagList = function() {
   //fixme
   var tagText = this.tagsInput.val();
@@ -83,27 +94,53 @@ Task.prototype.setDetail = function(detail_) {
 Task.prototype.setTags = function(tags_) {
 };
 
+
+
+
+
+
+
 $(document).ready(function() {
   $('.task-div').find('.task-info').hide().end()
   .find('.task-title').click(function() {
     $(this).parent().find('.task-info').slideToggle();
   });
+  $('.add-new-task').click(function() {
+    $('.new-task-box').slideToggle();
+  });
 
   //hide
-  $('.task-title-input').hide();
-  $('.task-detail-input').hide();
-  $('.task-tags-input').hide();
-  $('.edit-op').hide();
+  $('ul .task-title-input').hide();
+  $('ul .task-detail-input').hide();
+  $('ul .task-tags-input').hide();
+  $('ul .edit-op').hide();
 
   //set action for new task
-  $('.task-create-btn').click(function() {
+  $('.new-task-box .edit-op .confirm').click(function() {
+    taskElem = $('.new-task-box');
+    task = new Task(taskElem);
+    var taskObj = {
+      title: task.getTitleInput(),
+      detail: task.getDetailInput(),
+      priority: 1
+    };
+    
     $.ajax({
       url: '/task/create/',
       type: 'post',
-      dataType: 'TODO',
-      success: function() {
+      data: JSON.stringify(taskObj),
+      success: function(revTaskObj) {
+        revTaskObj = revTaskObj[0];
+        //TODO
+
       }
     });
+
+  });
+  $('.new-task-box .edit-op .cancel').click(function() {
+    newTaskElem = $(this).parent().parent();
+    task = new Task(newTaskElem);
+    $('.new-task-box').toggle("slow");
   });
 
   //set action for task-op 
@@ -182,10 +219,6 @@ $(document).ready(function() {
         $('#done').append(taskElem)
       }
     });
-  })
-  .end().find('.cancel').click(function() {
-    var taskElem = $(this).parent().parent().parent();
-    (new Task(taskElem)).toggleAll();
-  }); //end edit-op
+  });
 
 });

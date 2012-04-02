@@ -3,9 +3,13 @@ from django.http import HttpResponse
 from django.utils import simplejson
 from django.core import serializers
 from eagle.task.models import Task, Status
+from eagle.account.models import Account
 
 
 _minetype = 'application/javascript, charset=utf8'
+
+def get_account(user):
+    return Account.objects.get(user=user)
 
 def create_task(request):
     print 'in create'
@@ -14,12 +18,14 @@ def create_task(request):
         print taskObj
         task = Task.objects.create(title=taskObj['title'],
                                    detail=taskObj['detail'],
-                                   owner=request.user,
-                                   begin_time=taskObj['begin_time'],
-                                   end_time=taskObj['end_time'],
-                                   privacy=taskObj['privacy'],
-                                   mode=taskObj['mode'],
+                                   owner=get_account(request.user),
+                                   #begin_time=taskObj['begin_time'],
+                                   #end_time=taskObj['end_time'],
+                                   #privacy=taskObj['privacy'],
+                                   #mode=taskObj['mode'],
+                                   mode=1,
                                    priority=taskObj['priority'])
+        print task
         task.save()
         new_task = Task.objects.filter(id=task.pk)
         data = serializers.serialize('json', new_task)
