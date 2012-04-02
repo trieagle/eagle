@@ -164,4 +164,28 @@ $(document).ready(function() {
     (new Task(taskElem)).toggleAll();
   }); //end edit-op
 
+  //set action for done-op, default rate is 5
+  $('.task-rate').click(function() {
+    var taskElem = $(this).parent();
+    var task = new Task(taskElem);
+    var taskObj = {
+      id: task.getID(),
+      rate: 5
+    };
+    $.ajax({
+      url: '/task/done/',
+      type: 'post',
+      dataType: 'json',
+      data: JSON.stringify(taskObj),
+      success: function(doneFlag) {
+        doneFlag;
+        $('#done').append(taskElem)
+      }
+    });
+  })
+  .end().find('.cancel').click(function() {
+    var taskElem = $(this).parent().parent().parent();
+    (new Task(taskElem)).toggleAll();
+  }); //end edit-op
+
 });
