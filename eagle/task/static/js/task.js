@@ -95,6 +95,17 @@ $(document).ready(function() {
   $('.task-tags-input').hide();
   $('.edit-op').hide();
 
+  //set action for new task
+  $('.task-create-btn').click(function() {
+    $.ajax({
+      url: '/task/create/',
+      type: 'post',
+      dataType: 'TODO',
+      success: function() {
+      }
+    });
+  });
+
   //set action for task-op 
   $('.task-op').find('.edit').click(function() {
     var taskElem = $(this).parent().parent().parent();
@@ -102,8 +113,21 @@ $(document).ready(function() {
 
   }).end().find('.delete').click(function() {
     var taskElem = $(this).parent().parent().parent();
-    taskElem.remove();
-    //TODO
+    var task = new Task(taskElem);
+    var taskIdObj = {
+      id: task.getID()
+    };
+    $.ajax({
+      url: '/task/delete/',
+      type: 'post',
+      dataType: 'json',
+      data: JSON.stringify(taskIdObj),
+      success: function(delFlag) {
+        //TODO
+        delFlag && taskElem.remove();
+       
+      }
+    });
   }); //end task-op
 
   //set action for edit-op
@@ -118,6 +142,7 @@ $(document).ready(function() {
       priority: 1,
       tag: task.getTagList()
     };
+
     $.ajax({
       url: '/task/update/',
       type: 'post',
@@ -128,7 +153,7 @@ $(document).ready(function() {
         //TODO
         var taskId = '#task-' + revTaskObj['pk'];
         //var task = new Task($(taskId));
-        task.setTitle(revTaskObj['fields']['title']);
+        task.setTitle(revTaskObj.fields['title']);
         task.setDetail(revTaskObj.fields['detail']);
         task.setTags(revTaskObj.fields['tag']);
         task.toggleAll();
