@@ -15,6 +15,8 @@ def fetch_lists(user_id):
     all_tasks = task_model.Task.objects.filter(owner=user_id)
 
     for task_item in all_tasks:
+        if not task_item.alive:
+            continue
         task_list = task_type[task_item.mode]
         if task_item.done():
             task_done.append(task_item)
