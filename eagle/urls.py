@@ -28,6 +28,7 @@ urlpatterns = patterns(
     url(r'^index/$','account.views.index'),
     url(r'^task/update/$', 'eagle.task.views.update_task'),
     url(r'^task/delete/$', 'eagle.task.views.remove_task'),
+    url(r'^task/done/$', 'eagle.task.views.done_task'),
     url(r'^account/', include('eagle.account.urls')),
     url(r'^task/', include('eagle.task.urls')),
 )

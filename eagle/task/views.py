@@ -64,14 +64,16 @@ def remove_task(request):
 
 def done_task(request):
     if request.is_ajax():
-        req = simplejson.loads(request.raw_post_data)
-        task_id = req['id']
-        _rate = req['rate']
+        taskObj = simplejson.loads(request.raw_post_data)
+        task_id = taskObj['id']
+        _rate = taskObj['rate']
+        print 'in done1', task_id, _rate
         _task = Task.objects.get(id=task_id)
+        print 'in done2', _task
         status = Status.objects.create(task=_task, rate=_rate)
         status.save()
-        data = serializers.serialize('json',[status]) ##only serialize queryset
-        return HttpResponse(data, _minetype)
+        print status
+        return HttpResponse(simplejson.dumps(True), _minetype)
     return HttpResponse('error:not ajax request')
 
 def undone_task(request):

@@ -45,7 +45,6 @@ class Task(models.Model):
             last_done = Status.objects.filter(task=self).latest("time")
         except Status.DoesNotExist:
             return is_done
-
         if last_done:
             cur = datetime.datetime.now()
             if self.mode == TAG_TASK:

@@ -11,39 +11,40 @@
 -->
 {% load task_extra %}
 {% for mode, tasks in tasks_list.items %}
+<br>
 <div id={{mode}} class="task-div"> <!--filter-->
+  <h3>{{mode}}</h3>
   <ul>
     {% for atask in tasks %}
     <li id={{atask.id|prefix:"task-"}}>
-    <a href="#" class="task-title" >{{atask.title}}</a>
-    <input class="task-title-input" value="">
+        <a href="#" class="task-title" >{{atask.title}}</a>
+        <input class="task-title-input" value="">
 
-    <div class="task-rate"><a>Done?</a></div>
-    <div class="task-info" >
-      <span class="task-detail">{{atask.detail}}</span>
-      <input class="task-detail-input" value="">
+        <div class="task-rate"><a>Done?</a></div>
+        <div class="task-info" >
+          <span class="task-detail">{{atask.detail}}</span>
+          <input class="task-detail-input" value="">
 
-      <br>
-      <a class="task-priority">{{atask.priority}}</a>
-      <div class="task-tags">
-        {% for t in atask.tag.all %}
+          <br>
+          <a class="task-priority">{{atask.priority}}</a>
+          <div class="task-tags">
+            {% for t in atask.tag.all %}
 
-        <a class="tag">{{t.name}}</a>
-        {% endfor %}
-      </div>
-      <input class="task-tags-input" value="">
+            <a class="tag">{{t.name}}</a>
+            {% endfor %}
+          </div>
+          <input class="task-tags-input" value="">
 
-      <div class="task-op">
-        <button class="edit">edit</button>
-        <button class="delete">delete</button>
-      </div>
-      <div class="edit-op">
-        <button class="confirm">confirm</button>
-        <button class="cancel">cancel</button>
-      </div>
+          <div class="task-op">
+            <button class="edit">edit</button>
+            <button class="delete">delete</button>
+          </div>
+          <div class="edit-op">
+            <button class="confirm">confirm</button>
+            <button class="cancel">cancel</button>
+          </div>
 
-      <hr>
-    </div>
+        </div>
     </li>
     {% endfor %}
   </ul>

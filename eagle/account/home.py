@@ -3,6 +3,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from account.models import Account
 from task import models as task_model
+import collections;
+
 
 def fetch_lists(user_id):
     day_task, week_task, month_task, year_task, task_done = [], [], [], [], []
@@ -27,7 +29,7 @@ def fetch_lists(user_id):
     return day_task, week_task, month_task, year_task, task_done                
 
 def home(request):
-    account = Account.objects.get(user=request.user)
+    account = Account.objects.get(user=request.user) 
     day_task, week_task, month_task, year_task, task_done = fetch_lists(
         account.id)
     #print day_task, week_task, month_task, year_task, task_done
@@ -37,7 +39,14 @@ def home(request):
                   "month": month_task,
                   "year": year_task,
                   "done": task_done}
-
+    priority = {"day": 1,
+                "week": 2,
+                "month": 3,
+                "year": 4,
+                "done": 5}
+    ordered_tasks_list = collections.OrderedDict(sorted(tasks_list.items(), key=lambda t: priority[t[0]]))
+    for key, value in ordered_tasks_list.items():
+        print key
     return render_to_response("common/index.html",
-                              {"tasks_list": tasks_list},
+                              {"tasks_list": ordered_tasks_list},
                               context_instance=RequestContext(request))
