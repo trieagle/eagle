@@ -31,7 +31,7 @@ class Task(models.Model):
 
     def active(self):
         return datetime.datetime.now() >= self.begin_time and \
-            datetime.datetime.now() <= self.end_time
+                datetime.datetime.now() <= self.end_time
 
     def debug(func):
         def wrapper(self):
@@ -45,26 +45,20 @@ class Task(models.Model):
             last_done = Status.objects.filter(task=self).latest("time")
         except Status.DoesNotExist:
             return is_done
+
+
         if last_done:
             cur = datetime.datetime.now()
-            if self.mode == TAG_TASK:
-                is_done = True
-            elif self.mode == ONCE_TASK:
-                is_done = True
-            elif self.mode == DAY_TASK:
-                if last_done.time.day >= cur.day:
-                    is_done = True
-            elif self.mode == WEEK_TASK:
-                if last_done.time.day >= cur.day-datetime.datetime.weekday(cur) + 1:
-                    is_done = True
-            elif self.mode == MONTH_TASK:
-                if last_done.time.month >= cur.month:
-                    is_done = True
-            elif self.mode == YEAR_TASK:
-                if last_done.time.year >= cur.year:
-                    is_done = True	
+            is_done = {
+                TAG_TASK: lambda: True,
+                ONCE_TASK: lambda: True,
+                DAY_TASK: lambda: last_done.time.day >= cur.day,
+                WEEK_TASK: lambda: last_done.time.day >= cur.day - \
+                            datetime.datetime.weekday(cur) + 1,
+                MONTH_TASK: lambda: last_done.time.month >= cur.month,
+                YEAR_TASK: lambda: last_done.time.year >= cur.year
+                }.get(self.mode)()
             return is_done
-
 
     def __unicode__(self):
         return str(self.id) + self.title
@@ -75,9 +69,8 @@ class Task(models.Model):
 
 def in_today(a_task):
     return a_task.begin_time.year == datetime.datetime.now().year and \
-        a_task.begin_time.month == datetime.datetime.now().month and \
-        a_task.begin_time.day == datetime.datetime.now().day
-
+            a_task.begin_time.month == datetime.datetime.now().month and \
+            a_task.begin_time.day == datetime.datetime.now().day
 
 
 class Status(models.Model):
