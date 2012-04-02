@@ -1,43 +1,70 @@
 @charset "utf-8";
 /* RESETS */
-*{margin:0; padding:0;    outline:none;}
-html{overflow-y:scroll;}
-body{font:12px 'Lucida Grande',sans-serif; color:#555; background:url(../images/body.png) }
-a{ text-decoration:none; color:#3784c9 }
-a:hover { text-decoration:none; color:#40688d }
-ul{ list-style:none; }
+* { 
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+html {
+    overflow-y:scroll;
+}
+
+body {
+    font: 12px 'Lucida Grande', sans-serif;
+    color: #555;
+    background: url(../images/body.png)
+}
+
+a {
+    text-decoration:none; color:#3784c9
+}
+
+a:hover {
+    text-decoration:none;
+    color:#40688d
+}
+
+ul {
+    list-style:none;
+}
 
 /**
  * Fonts
-*/
+ */
 
 /**
  * Layout
-*/
-#wrapper{
-    width:965px;
-    margin:0px auto;
-}
-#header{
+ */
+#wrapper {
     width: 965px;
-    padding-bottom:4px;
-    position:absolute;
-    top:0;
+    margin: 0px auto;
 }
+
+#header {
+    width: 965px;
+    padding-bottom: 4px;
+    position: absolute;
+    top: 0;
+}
+
 #header #logo a {
     float: left;
-    color:#fff;
-    text-shadow:1px 1px #3d5d7b;
+    color: #fff;
+    text-shadow: 1px 1px #3d5d7b;
     padding: 67px 0 0 0;
-    height:0px;
-    width:200px;
-    overflow:hidden;
-    display:block;
-    background:url(../images/logo.png) no-repeat left top;
-    font-size:40px;
-    letter-spacing:-1px;
+    height: 0px;
+    width: 200px;
+    overflow: hidden;
+    display: block;
+    background: url(../images/logo.png) no-repeat left top;
+    font-size: 40px;
+    letter-spacing: -1px;
 }
-#header #logo a:hover {     background:url(../images/logo.png) no-repeat -200px top; }
+
+#header #logo a:hover {
+    background: url(../images/logo.png) no-repeat -200px top;
+}
 
 #main-content h1 {
     color:#5d98d0;
@@ -177,12 +204,12 @@ ul{ list-style:none; }
 
 .snippet-code{
     margin:0;
-/*    background-color: #fafafa;
+    /*    background-color: #fafafa;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;*/
-    border: 1px solid #ddd;
-    border-top: 1px solid #aaa;
-    background:url(../images/grid.jpg) repeat left 2px;
+border: 1px solid #ddd;
+border-top: 1px solid #aaa;
+background:url(../images/grid.jpg) repeat left 2px;
 }
 .linenos {
     padding:0 7px 0 3px; border-right:1px solid #bbb; text-align:right;
@@ -233,7 +260,7 @@ pre { font-family:Courier New; font-size:11px; line-height:16px; }
 
 /**
  * Forms
-*/
+ */
 label{
     display:block;
     float:left;
@@ -520,7 +547,7 @@ div.gravatar {
     float:right;
     border:1px solid #6a8c1a;
     border-top:none;
-     -moz-border-radius:0 0 5px 5px;
+    -moz-border-radius:0 0 5px 5px;
     -webkit-border-top-left-radius:0;
     -webkit-border-top-right-radius:0;
     -webkit-border-bottom-left-radius:5px;
@@ -532,7 +559,7 @@ div.gravatar {
 }
 #primary-navigation .first,
 #primary-navigation .first a {
-     -moz-border-radius:0 0 0 5px;
+    -moz-border-radius:0 0 0 5px;
     -webkit-border-top-left-radius:0;
     -webkit-border-top-right-radius:0;
     -webkit-border-bottom-left-radius:5px;
@@ -652,7 +679,7 @@ dd {
     top:0;
     left:50%;
     color:#fff;
-     -moz-border-radius:0 0 7px 7px;
+    -moz-border-radius:0 0 7px 7px;
     -webkit-border-top-left-radius:0;
     -webkit-border-top-right-radius:0;
     -webkit-border-bottom-left-radius:7px;
@@ -701,8 +728,8 @@ dd {
 }
 
 /**
-    OpenId CSS
-**/
+OpenId CSS
+ **/
 #auth_form {
     display: block;
     width: 250px;
@@ -803,20 +830,22 @@ a.openid_large_btn:focus {
 #download-plugin img {
     border:none;
 }
+
 #download-plugin:hover {
     background:url(../images/download-this.png) no-repeat left -50px;
 }
+
 .plugin-icon {
     margin-top:-54px;
 }
 
 /**
-    End OpenID CSS
-**/
+End OpenID CSS
+ **/
 
 /**
-    CANT TOUCH THIS
-*/
+CANT TOUCH THIS
+ */
 
 .clearfix:after {
     content: ".";
