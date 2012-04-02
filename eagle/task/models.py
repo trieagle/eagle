@@ -30,12 +30,22 @@ class Task(models.Model):
     privacy = models.IntegerField(default=0)
 
     def active(self):
-        return alive==1 and datetime.datetime.now() >= self.begin_time and \
+        return datetime.datetime.now() >= self.begin_time and \
             datetime.datetime.now() <= self.end_time
 
+    def debug(func):
+        def wrapper(self):
+            return True
+        return wrapper
+
+    @debug
     def done(self):
         is_done = False
-        last_done = Status.objects.filter(task=self).latest("time")
+        try:
+            last_done = Status.objects.filter(task=self).latest("time")
+        except Status.DoesNotExist:
+            return is_done
+
         if last_done:
             cur = datetime.datetime.now()
             if self.mode == TAG_TASK:
@@ -55,10 +65,6 @@ class Task(models.Model):
                 if last_done.time.year >= cur.year:
                     is_done = True	
             return is_done
-    def in_today(a_task):
-        return a_task.year == datetime.datetime.now().year and \
-            a_task.month == datetime.datetime.now().month and \
-            a_task.day == datetime.datetime.now().day
 
 
     def __unicode__(self):
@@ -66,6 +72,13 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['title']
+
+
+def in_today(a_task):
+    return a_task.begin_time.year == datetime.datetime.now().year and \
+        a_task.begin_time.month == datetime.datetime.now().month and \
+        a_task.begin_time.day == datetime.datetime.now().day
+
 
 
 class Status(models.Model):

@@ -125,7 +125,6 @@ $(document).ready(function() {
       success: function(delFlag) {
         //TODO
         delFlag && taskElem.remove();
-       
       }
     });
   }); //end task-op
