@@ -114,6 +114,7 @@ $(document).ready(function() {
   $('ul .task-detail-input').hide();
   $('ul .task-tags-input').hide();
   $('ul .edit-op').hide();
+  $('.new-task-box').slideToggle();
 
   //set action for new task
   $('.new-task-box .edit-op .confirm').click(function() {
@@ -133,14 +134,14 @@ $(document).ready(function() {
         revTaskObj = revTaskObj[0];
         //TODO
 
+        $('.new-task-box').slideToggle();
+
       }
     });
 
   });
   $('.new-task-box .edit-op .cancel').click(function() {
-    newTaskElem = $(this).parent().parent();
-    task = new Task(newTaskElem);
-    $('.new-task-box').toggle("slow");
+    $('.new-task-box').slideToggle();
   });
 
   //set action for task-op 
