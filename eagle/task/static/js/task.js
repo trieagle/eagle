@@ -168,7 +168,7 @@ $(document).ready(function() {
   }); //end task-op
 
   //set action for edit-op
-  $('.edit-op').find('.confirm').click(function() {
+  $('.task-op .edit-op').find('.confirm').click(function() {
     var taskElem = $(this).parent().parent().parent();
     var task = new Task(taskElem);
 
