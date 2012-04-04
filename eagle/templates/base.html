@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>
-            {% block title%}!!!Change the title!!!{% endblock%}
+            {% block title%}{% endblock%}
             {% if home_page %}??{% endif %}
         </title>
         <link rel="shortcut icon" href="{{STATIC_URL}}img/eagle.ico" />
@@ -28,9 +28,6 @@
                         <a class="first" href="/account/userinfo/">{{user.username}}</a>
                         </li>
                         <li>
-                        <a href="/task/create/">Add a task</a>
-                        </li>
-                        <li>
                         <a href="/account/logout/">Logout</a>
                         </li>
                         {% else %}
@@ -40,7 +37,7 @@
                 </div>
             </div>
 
-            <div id="main" class="{% if e %}intro {% endif %}{% if sidebared %}sidebared {% endif %}clearfix">
+            <div id="main" class="main clearfix">
                 <div id="main-content">
                     {% block content %}
                     {% endblock %}
