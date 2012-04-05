@@ -4,8 +4,8 @@
 {% for mode, tasks in tasks_list.items %}
 <br>
 <div id={{mode}} class="task-div"> <!--filter-->
-    <h3>{{mode}}</h3>
-    <ul>
+    <h3 class="task-div-header">{{mode}}</h3>
+    <ul class="task-div-body">
         {% for atask in tasks %}
         <li id={{atask.id|prefix:"task-"}} class="task-li">
             <div class="task-header"> 
@@ -14,35 +14,28 @@
                 <a class="task-rate">Done?</a>
             </div>
 
-
-
-            <div id="task-info" class="task-info" >
+            <div class="task-body">
                 <input class="task-detail" value="{{atask.detail}}">
+            </div>
 
-                <br>
-
-                <div class="task-tags">
-                    {% for t in atask.tag.all %}
-                    <a class="tag">{{t.name}}</a>
-                    {% endfor %}
+            <div class="task-footer">
+                <div class="task-mode">
+                    <span class="edit-mode">Edit mode:</span>
                 </div>
-
-                <div class="task-tags-edit">
-                    <a class="task-tags">Tags</a>
-                    <input class="task-tags-input" value="">
+                <div class="task-time">
+                    <span class="edit-time">Edit time:</span>
                 </div>
-
-                <div class="task-option">
-                    <button class="edit opt-btn">edit</button>
-                    <button class="delete opt-btn">delete</button>
-                </div>
-
-                <div class="task-edit-option">
-                    <button class="confirm opt-btn">confirm</button>
-                    <button class="cancel opt-btn">cancel</button>
+                <div class="task-tag">
+                    <span class="edit-tag-list">Edit tags:</span>
+                    <ul>
+                        {% for t in atask.tag.all %}
+                        <li>
+                            <a href="#">{{t.name}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
-        </li>
         {% endfor %}
     </ul>
 </div>
