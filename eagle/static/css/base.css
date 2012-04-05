@@ -70,6 +70,10 @@ ul {
     background: url(../img/logo.png) no-repeat -200px top;
 }
 
+#header #menu{
+    margin-left:61.8%;
+}
+
 #main {
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
@@ -79,12 +83,12 @@ ul {
     margin-top:100px;
 }
 
-#primary-navigation {
+.header-navigation {
     float:left;
     margin-top:8px;
     margin-left:61.8%;
 }
-#primary-navigation a {
+.header-navigation a {
     padding:9px 10px 8px;
     color:#333 !important;
     font-size:17px;
@@ -92,21 +96,20 @@ ul {
     font-weight:normal;
     text-shadow:-1px 1px #d6d6d6;
 }
-#primary-navigation li{
+.header-navigation li{
     display: block;
     float:left;
 }
 #main-content{
     clear: both;
 }
-.secondary-navigation{
+.footer-navigation{
     padding:0 10px;
 }
-.secondary-navigation li {
+.footer-navigation li {
     display:inline;
 }
-.secondary-navigation span,
-.secondary-navigation a{
+.footer-navigation a{
     margin-right:10px;
     color:#2d4d6b;
     float:left;
@@ -115,9 +118,33 @@ ul {
     padding:10px;
     text-shadow:1px 1px #bde0ff;
 }
-.secondary-navigation a:hover{
+.footer-navigation a:hover{
     color:#0d1d3b;
 }
+
+/* box level
+ */
+
+
+.box-container {
+    float:left;
+    color:#d1e8ff;
+}
+#left-box { width: 61.8% }
+#right-box { width: 38.2% }
+
+.boxed {
+    border:1px solid #b4d6f5;
+    margin-bottom:20px;
+    padding:10px;
+    background:url(../img/box-grad.png) repeat-x left top #3f668b;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+}
+
+
+
 /**
  task part
  */
@@ -133,6 +160,12 @@ ul {
 .task-li{
     margin:10px 0 5px 0;
     border:1px solid white;
+}
+.task-header{
+
+}
+.task-priority{
+
 }
 .task-title{
     font-family:Arial;
@@ -219,22 +252,6 @@ div.help-text{
     float: left;
 }
 
-.box-container {
-    float:left;
-    color:#d1e8ff;
-}
-.left-box { width: 61.8% }
-.right-box { width: 38.2% }
-
-.boxed {
-    border:1px solid #b4d6f5;
-    margin-bottom:20px;
-    padding:10px;
-    background:url(../images/home-box-grad.png) repeat-x left top #3f668b;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    border-radius:10px;
-}
 
 
 
