@@ -129,19 +129,21 @@ ul {
     text-shadow:1px 1px #6a8c1a;
     color:#0d1d3b;
 }
+
+.task-li{
+    margin:10px 0 5px 0;
+    border:1px solid white;
+}
 .task-title{
-    padding: 5px 0 0px;
     font-family:Arial;
+    margin-left:3px;
     font-weight:bold;
     letter-spacing:1;
     font-size:23px;
 }
 .task-rate{
-    width:30;
     text-align:right;
-    display:inline;
-    padding: 0 0 0 61.8%;
-    nt-size: 0.618em;
+    margin-left:33px;
 }
 .task-info{
     display:block;

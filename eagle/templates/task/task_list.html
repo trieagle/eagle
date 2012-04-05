@@ -7,11 +7,11 @@
   <h3>{{mode}}</h3>
   <ul>
     {% for atask in tasks %}
-    <li id={{atask.id|prefix:"task-"}}>
+    <li id={{atask.id|prefix:"task-"}}, class="task-li">
         <a href="#" class="task-title" >{{atask.title}}</a>
         <input class="task-title-input" value="">
 
-        <div class="task-rate"><a>Done?</a></div>
+        <a class="task-rate">Done?</a>
         <div class="task-info" >
           <span class="task-detail">{{atask.detail}}</span>
           <input class="task-detail-input" value="">
