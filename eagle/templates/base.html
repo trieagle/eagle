@@ -4,22 +4,19 @@
         <meta charset="utf-8" />
         <title>
             {% block title%}{% endblock%}
-            {% if home_page %}??{% endif %}
+            {% if home_page %}{% endif %}
         </title>
         <link rel="shortcut icon" href="{{STATIC_URL}}img/eagle.ico" />
         <link rel="stylesheet" media="all" charset="utf-8" href="{{STATIC_URL}}css/base.css"/>
-        {% block extra_css %}
-        {% endblock %}
-        {% block head %}
-        {% endblock %}
+        {% block extra_css %}{% endblock %}
+        {% block head %}{% endblock %}
     </head>
     <body>
         {% csrf_token %}
         <div id="wrapper">
             <div id="header" class="clearfix">
-                <div id="logo" >
-                    <!-- 尚有错误 -->
-                    <a href="/account/index/"><img src ="{{STATIC_URL}}img/eagle.ico" > </img></a>
+                <div classs="logo" >
+                    <a href="/account/index/"><img src ="{{STATIC_URL}}img/logo.png" > </img></a>
                 </div>
                 <div class="menubar clearfix">
                     <ul id="primary-navigation">
