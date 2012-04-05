@@ -18,11 +18,10 @@
         <div id="wrapper">
             <div id="header" class="clearfix">
                 <div id="logo" >
-                    <!-- 尚有错误 -->
                     <a href="/account/index/"><img src ="{{STATIC_URL}}img/eagle.ico" > </img></a>
                 </div>
-                <div class="menubar clearfix">
-                    <ul id="primary-navigation">
+                <div id="menu" class="menubar clearfix">
+                    <ul class="header-navigation">
                         {% if user.is_authenticated %}
                         <li>
                         <a class="first" href="/account/userinfo/">{{user.username}}</a>
@@ -45,7 +44,7 @@
             </div>
 
             <div id="footer">
-                <ul class="secondary-navigation">
+                <ul class="footer-navigation">
                     <li><a href="/about/">About</a></li>
                     <li><a href="/faq/">FAQ</a></li>
                     <li><a href="/legal/">Legal</a></li>

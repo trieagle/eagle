@@ -4,41 +4,47 @@
 {% for mode, tasks in tasks_list.items %}
 <br>
 <div id={{mode}} class="task-div"> <!--filter-->
-  <h3>{{mode}}</h3>
-  <ul>
-    {% for atask in tasks %}
-    <li id={{atask.id|prefix:"task-"}}, class="task-li">
-        <a href="#" class="task-title" >{{atask.title}}</a>
-        <input class="task-title-input" value="">
+    <h3>{{mode}}</h3>
+    <ul>
+        {% for atask in tasks %}
+        <li id={{atask.id|prefix:"task-"}} class="task-li">
+            <div class="task-header"> 
+                <a href="#" class="task-priority">{{atask.priority}}</a>
+                <a href="#" class="task-title" >{{atask.title}}</a>
+                <a class="task-rate">Done?</a>
+            </div>
 
-        <a class="task-rate">Done?</a>
-        <div class="task-info" >
-          <span class="task-detail">{{atask.detail}}</span>
-          <input class="task-detail-input" value="">
 
-          <br>
-          <a class="task-priority">{{atask.priority}}</a>
-          <div class="task-tags">
-            {% for t in atask.tag.all %}
 
-            <a class="tag">{{t.name}}</a>
-            {% endfor %}
-          </div>
-          <input class="task-tags-input" value="">
+            <div id="task-info" class="task-info" >
+                <input class="task-detail" value="{{atask.detail}}">
 
-          <div class="task-op">
-            <button class="edit">edit</button>
-            <button class="delete">delete</button>
-          </div>
-          <div class="edit-op">
-            <button class="confirm">confirm</button>
-            <button class="cancel">cancel</button>
-          </div>
+                <br>
 
-        </div>
-    </li>
-    {% endfor %}
-  </ul>
+                <div class="task-tags">
+                    {% for t in atask.tag.all %}
+                    <a class="tag">{{t.name}}</a>
+                    {% endfor %}
+                </div>
+
+                <div class="task-tags-edit">
+                    <a class="task-tags">Tags</a>
+                    <input class="task-tags-input" value="">
+                </div>
+
+                <div class="task-option">
+                    <button class="edit opt-btn">edit</button>
+                    <button class="delete opt-btn">delete</button>
+                </div>
+
+                <div class="task-edit-option">
+                    <button class="confirm opt-btn">confirm</button>
+                    <button class="cancel opt-btn">cancel</button>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
 </div>
 <hr>
 {% endfor %}

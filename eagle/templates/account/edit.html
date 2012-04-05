@@ -2,7 +2,8 @@
 {% block title %}Edit profile{% endblock %}
 {% block content %}
 <h1>Edit Profile</h1>
-<form id="edit_profile-form" method="post" action="" enctype="application/x-www-form-urlencoded">{% csrf_token %}
+<form id="edit_profile-form" method="post" action="" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
     {% for field in form %}
         <div class="input clearfix">
             {{ field }}
