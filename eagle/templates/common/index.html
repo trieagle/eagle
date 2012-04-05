@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-{#{% load taggit_extras %}#}
 
 {% block title%}
 {% endblock%}
@@ -14,34 +13,30 @@
 {% endblock %}
 
 {% block content %}
-<div id="home-boxes" class="clearfix">
+<div id="box" class="clearfix">
 
-    <div class="left-box box-container clearfix">
-        <div class="boxed clearfix">
-            <h2>Tasks</h2>
-		    {% include "task/task_create.html" %}
-           	{% include "task/task_list.html" %}
-        </div>
+    <div id="left-box" class="left-box box-container clearfix">
+        <h2>Tasks</h2><h4>I want to…</h4>
+        {% include "task/task_create.html" %}
+        {% include "task/task_list.html" %}
     </div>
 
-    <div class="right-box box-container clearfix">
-        <div class="boxed clearfix">
-		<h2>mood-diaries</h2>
-		{% include "task/mood_diary.html" %}
+    <div id="right-box" class="right-box box-container clearfix">
+        <div id="mood-box" class="boxed clearfix">
+            <h2>mood-diaries</h2>
+            {% include "task/mood_diary.html" %}
         </div>
 
-        <div class="boxed clearfix">
-		<h2>digg</h2>
-		{% include "task/digg.html" %}
+        <div id="digg-box" class="boxed clearfix">
+            <h2>digg</h2>
+            {% include "task/digg.html" %}
         </div>
 
-        <div class="boxed clearfix">
+        <div id="tag-box" class="boxed clearfix">
             <h2>Most used tags</h2>
             <div class="tagcloud clearfix">
-               <div id="flashcloud"></div>
             </div>
         </div>
     </div>
-
 </div>
 {% endblock %}
