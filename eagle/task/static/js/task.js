@@ -1,67 +1,8 @@
 function Task(taskElem) {
   this.task = taskElem;
-  this.title = taskElem.find('.task-title');
-  this.titleInput = taskElem.find('.task-title-input');
-  this.detail = taskElem.find('.task-detail');
-  this.detailInput = taskElem.find('.task-detail-input');
-  this.tags = taskElem.find('.task-tags');
-  this.tagsInput = taskElem.find('.task-tags-input');
-  this.taskOp = taskElem.find('.task-op');
-  this.editOp = taskElem.find('.edit-op');
-}
-
-Task.prototype.toggleTitle = function() {
-  if (this.title.is(':visible')) {
-    this.title.hide().next().val(this.title.html()).show();
-  } else {
-    this.title.show().next().hide();
-  }
-};
-
-Task.prototype.toggleDetail = function() {
-  if (this.detail.is(':visible')) {
-    this.detail.hide().next().val(this.detail.html()).show();
-  } else {
-    this.detail.show().next().hide();
-  }
-};
-
-Task.prototype.toggleTags = function() {
-  if (this.tags.is(':visible')) {
-    //TODO
-    var tagList = [];
-    this.tags.children().each(function() {
-      tagList.push($(this).text());
-    });
-    this.tags.hide().next().val(tagList.join()).show();
-  } else {
-    this.tags.show().next().hide();
-  }
-};
-
-Task.prototype.toggleOption = function() {
-  if (this.taskOp.is(':visible')) {
-    this.taskOp.hide().next().show();
-  } else {
-    this.taskOp.show().next().hide();
-  }
-};
-
-Task.prototype.toggleAll = function() {
-  this.toggleTitle();
-  this.toggleDetail();
-  this.toggleTags();
-  this.toggleOption();
-};
-
-Task.prototype.toggleEdit = function() {
-  this.task.children().each(function() {
-    if ($(this).is(':visible')) {
-      $(this).hide();
-    } else {
-      $(this).show();
-    }
-  });
+  this.header = taskElem.find('.task-header');
+  this.detail = taskElem.find('.task-body');
+  this.tags = taskElem.find('.task-footer');
 }
 
 
@@ -75,46 +16,46 @@ Task.prototype.getID = function() {
   return parseInt(this.task.attr('id').substring(5)); //task-123213
 };
 
-Task.prototype.getTitleInput = function() {
-  return this.titleInput.val();
-};
+Task.prototype.updateTagList = function() {
 
-Task.prototype.getDetailInput = function() {
-  return this.detailInput.val();
-};
+}
 
-Task.prototype.setTitle = function(title_) {
-  this.title.html(title_);
-};
+Task.prototype.updateMode = function() {
+}
 
-Task.prototype.setDetail = function(detail_) {
-  this.detail.html(detail_);
-};
+Task.prototype.updateTime = function() {
+  
+}
 
-Task.prototype.setTags = function(tags_) {
-};
-
-
-
-
-
-
+function initHide() {
+  $('ul .task-body').hide();
+  $('ul .task-footer').hide();
+  $('.edit-task-box').hide();
+}
 
 $(document).ready(function() {
-  $('.task-div').find('.task-info').hide().end()
-  .find('.task-title').click(function() {
-    $(this).parent().find('.task-info').slideToggle();
-  });
-  $('.add-new-task').click(function() {
-    $('.new-task-box').slideToggle();
+  //init hide
+  initHide();
+  
+  //set toggle for task-div
+  $('.task-div-header').click(function() {
+    $(this).next().slideToggle()
+    .find('.task-body').hide().end()
+    .find('.task-footer').hide();
   });
 
-  //hide
-  $('ul .task-title-input').hide();
-  $('ul .task-detail-input').hide();
-  $('ul .task-tags-input').hide();
-  $('ul .edit-op').hide();
-  $('.new-task-box').slideToggle();
+  //set toggle for task-title
+  $('.task-div .task-header .task-title').click(function() {
+
+    $(this).parent().next().slideToggle()  //task-body
+    .next().slideToggle();  //task-footer
+  });
+
+  //set toggle for add-new-task
+  $('.add-new-task').click(function() {
+    $('.edit-task-box').slideToggle();
+  });
+
 
   //set action for new task
   $('.new-task-box .edit-op .confirm').click(function() {
@@ -140,6 +81,7 @@ $(document).ready(function() {
     });
 
   });
+
   $('.new-task-box .edit-op .cancel').click(function() {
     $('.new-task-box').slideToggle();
   });
@@ -196,11 +138,7 @@ $(document).ready(function() {
         task.toggleAll();
       }
     });
-  })
-  .end().find('.cancel').click(function() {
-    var taskElem = $(this).parent().parent().parent();
-    (new Task(taskElem)).toggleAll();
-  }); //end edit-op
+  });
 
   //set action for done-op, default rate is 5
   $('.task-rate').click(function() {

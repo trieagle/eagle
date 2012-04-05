@@ -5,6 +5,7 @@ import datetime
 class Tag(models.Model):
     name = models.CharField(max_length=30)
     create_time = models.DateTimeField(default=datetime.datetime.now);
+
     def __unicode__(self):
         return self.name
 
