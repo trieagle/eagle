@@ -1,20 +1,41 @@
 <div id="task-create-box" class="task-create boxed">
     <a href="#" class="add-new-task">Add New Task</a>
     <div id="edit-task-box" class="edit-task-box">
-
-        <a class="task-title">Title</a>
-        <input class="task-title-input" value="">
+        
+        <div class="edit-left">
+            <a class="task-title">Title</a>
+            <input class="task-title-input" value="">
+            <br>
+            <input class="task-detail-input" value="">
+        </div>
+        
+        <div class="edit-right">
+            <div class="task-mode">
+                <a>Repeat</a>
+                <ul>
+                    <li class="task-once"><input type="radio" name="mode" value="0">once</li>
+                    <li class="task-day"><input type="radio" name="mode" value="1">daily</li>
+                    <li class="task-week" ><input type="radio" name="mode" value="2">weekly</li>
+                    <li class="task-month"><input type="radio" name="mode" value="3">monthly</li>
+                    <li class="task-year" ><input type="radio" name="mode" value="4">yearly</li>
+                </ul>
+            </div>
+            <div class="task-time">
+                <div style="" class="from-time">
+                    <input class="text dr-date" id=":1y-sd" size="9" title="From date">
+                    <input class="text dr-time" id=":1y-st" size="7" title="From time" tabindex="0">
+                </div>
+                <a> To </a>
+                <div class="end-time">
+                    <input class="text dr-time" id=":1y-et" size="7" title="Until time" tabindex="0">
+                    <input class="text dr-date" id=":1y-ed" size="9" title="Until date">
+                </div>
+            </div>
+            <div class="task-tag">
+                <a class="task-tags">Tags</a>
+                <input class="task-tags-input" value="">
+            </div>
         <br>
-
-
-        <textarea class="task-detail-input" value="">
-        </textarea>
-        <br>
-
-        <a class="task-tags">Tags</a>
-        <input class="task-tags-input" value="">
-        <br>
-
         <div class="task-edit-option">
             <button class="confirm opt-btn">confirm</button>
             <button class="cancel opt-btn">cancel</button>

@@ -92,6 +92,7 @@ $(document).ready(function() {
     var createInfo = {
       title: $('.edit-task-box .task-title-input').val(),
       detail: $('.edit-task-box .task-detail-input').val(),
+      mode: $('input[name=mode]:checked').val(),
       priority: 1,
     };
     $.ajax({

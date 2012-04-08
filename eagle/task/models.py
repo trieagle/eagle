@@ -30,25 +30,28 @@ class Task(models.Model):
     tag = models.ManyToManyField(Tag, blank=True)
     privacy = models.IntegerField(default=0)
 
+    
     def active(self):
-        return datetime.datetime.now() >= self.begin_time and \
-                datetime.datetime.now() <= self.end_time
+        return datetime.datetime.now().day >= self.begin_time.day and \
+                datetime.datetime.now().day <= self.end_time.day
 
     def debug(func):
         def wrapper(self):
             return True
         return wrapper
 
-    @debug
+    #@debug
     def done(self):
         is_done = False
         try:
             last_done = Status.objects.filter(task=self).latest("time")
+            print self.title, last_done.time
         except Status.DoesNotExist:
             return is_done
 
 
         if last_done:
+            print 'in last_done'
             cur = datetime.datetime.now()
             is_done = {
                 TAG_TASK: lambda: True,
@@ -59,7 +62,7 @@ class Task(models.Model):
                 MONTH_TASK: lambda: last_done.time.month >= cur.month,
                 YEAR_TASK: lambda: last_done.time.year >= cur.year
                 }.get(self.mode)()
-            return is_done
+        return is_done
 
     def __unicode__(self):
         return str(self.id) + self.title

@@ -170,7 +170,6 @@ ul {
 .task-div {
 }
 .task-div-body{
-
 }
 .task-li{
     margin:10px 0 5px 0;
@@ -190,7 +189,7 @@ ul {
 }
 .task-rate{
     text-align:center;
-    position:absolute;
+    position:static;
     left:40%;
 }
 .task-remove{
@@ -203,7 +202,9 @@ ul {
     a-webkit-border-radius: 10px;
     background:url(../img/login.jpg) repeat left 2px;
 }
-
+.task-footer * {
+    display:inline-block;
+}
 
 /**
  * login reg part

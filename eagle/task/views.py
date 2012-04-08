@@ -22,8 +22,8 @@ def create_task(request):
                                    #begin_time=taskObj['begin_time'],
                                    #end_time=taskObj['end_time'],
                                    #privacy=taskObj['privacy'],
-                                   #mode=taskObj['mode'],
-                                   mode=1,
+                                   mode=taskObj['mode'],
+                                   #mode=1,
                                    priority=taskObj['priority'])
         print task
         task.save()

@@ -27,11 +27,11 @@ def fetch_lists(user_id):
             delt_year = task_item.begin_time.year - datetime.datetime.now().year
             delt_month = task_item.begin_time.month - datetime.datetime.now().month
             delt_weekday = task_item.begin_time.weekday() - datetime.datetime.now().weekday()
-            delt_day = (task_item.begin_time - datetime.datetime.now()).days()
+            delt_day = (task_item.begin_time - datetime.datetime.now()).days
 
             if delt_month > 0:
                 over_month_task.append(task_item)
-            elif delt_day+1 > delt_weekday:
+            elif delt_day + 1 > delt_weekday:
                 month_task.append(task_item)
             elif delt_day > 0:
                 week_task.append(task_item)
