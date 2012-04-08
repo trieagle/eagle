@@ -5,3 +5,4 @@ eagle/PYSMELLTAGS*
 eagle/static/images/*
 .*
 !.gitignore
+*.swo
