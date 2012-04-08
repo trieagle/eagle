@@ -5,7 +5,6 @@ function Task(taskElem) {
   this.tags = taskElem.find('.task-footer');
 }
 
-
 Task.prototype.getTagList = function() {
   //fixme
   var tagText = this.tagsInput.val();
@@ -16,6 +15,21 @@ Task.prototype.getID = function() {
   return parseInt(this.task.attr('id').substring(5)); //task-123213
 };
 
+Task.prototype.updateDetail = function(detail) {
+  var updateInfo = {
+    id: this.getID(),
+    detail: detail,
+  };
+  $.ajax({
+    url: '/task/update/',
+    type: 'post',
+    dataType: 'json',
+    data: JSON.stringify(updateInfo),
+    success: function(revTaskObj) {
+    }
+  });
+}
+
 Task.prototype.updateTagList = function() {
 
 }
@@ -24,7 +38,25 @@ Task.prototype.updateMode = function() {
 }
 
 Task.prototype.updateTime = function() {
-  
+
+}
+
+Task.prototype.removeTask = function() {
+  var removeInfo = {
+    id: this.getID(),
+  };
+  $.ajax({
+    url: '/task/delete/',
+    type: 'post',
+    dataType: 'json',
+    data: JSON.stringify(removeInfo),
+    success: function(delFlag) {
+      //TODO
+      this.task.hide();
+      this.task.remove();
+    }
+  });
+
 }
 
 function initHide() {
@@ -36,7 +68,7 @@ function initHide() {
 $(document).ready(function() {
   //init hide
   initHide();
-  
+
   //set toggle for task-div
   $('.task-div-header').click(function() {
     $(this).next().slideToggle("slow")
@@ -46,7 +78,6 @@ $(document).ready(function() {
 
   //set toggle for task-title
   $('.task-div .task-header .task-title').click(function() {
-
     $(this).parent().next().slideToggle()  //task-body
     .next().slideToggle();  //task-footer
   });
@@ -56,58 +87,48 @@ $(document).ready(function() {
     $('.edit-task-box').slideToggle();
   });
 
-
-  //set action for new task
-  $('.new-task-box .edit-op .confirm').click(function() {
-    taskElem = $('.new-task-box');
-    task = new Task(taskElem);
-    var taskObj = {
-      title: task.getTitleInput(),
-      detail: task.getDetailInput(),
-      priority: 1
+  //set action for edit new task
+  $('.edit-task-box .task-edit-option .confirm').click(function() {
+    var createInfo = {
+      title: $('.edit-task-box .task-title-input').val(),
+      detail: $('.edit-task-box .task-detail-input').val(),
+      priority: 1,
     };
-    
     $.ajax({
       url: '/task/create/',
       type: 'post',
-      data: JSON.stringify(taskObj),
+      data: JSON.stringify(createInfo),
       success: function(revTaskObj) {
         revTaskObj = revTaskObj[0];
-        //TODO
-
-        $('.new-task-box').slideToggle();
+        $('.edit-task-box').slideToggle();
+        //TODO 
 
       }
     });
-
   });
 
-  $('.new-task-box .edit-op .cancel').click(function() {
-    $('.new-task-box').slideToggle();
+  //set action for cancel new task
+  $('.edit-task-box .task-edit-option .cancel').click(function() {
+    $('.edit-task-box .task-title-input').val("");
+    $('.edit-task-box .task-detail-input').val("");
+    $('.edit-task-box .task-tags-input').val("");
+    $('.edit-task-box').slideToggle();
   });
 
-  //set action for task-op 
-  $('.task-op').find('.edit').click(function() {
-    var taskElem = $(this).parent().parent().parent();
-    (new Task(taskElem)).toggleAll();
-
-  }).end().find('.delete').click(function() {
-    var taskElem = $(this).parent().parent().parent();
-    var task = new Task(taskElem);
-    var taskIdObj = {
-      id: task.getID()
-    };
-    $.ajax({
-      url: '/task/delete/',
-      type: 'post',
-      dataType: 'json',
-      data: JSON.stringify(taskIdObj),
-      success: function(delFlag) {
-        //TODO
-        delFlag && taskElem.remove();
+  //set action for task-detail
+  $('.task-body .task-detail').editable({
+    type: 'textarea',
+    onSubmit: function(content) {
+      if (content.current !== content.previous) {
+        (new Task($(this).parents('.task-li'))).updateDetail(
+          content.current);
       }
-    });
-  }); //end task-op
+    },
+  });
+
+  $('.task-header .task-remove').click(function() {
+    (new Task($(this).parents('.task-li'))).removeTask();
+  });
 
   //set action for edit-op
   $('.task-op .edit-op').find('.confirm').click(function() {
@@ -119,25 +140,8 @@ $(document).ready(function() {
       title: task.getTitleInput(),
       detail: task.getDetailInput(),
       priority: 1,
-      tag: task.getTagList()
+      tag: task.getTagList(),
     };
-
-    $.ajax({
-      url: '/task/update/',
-      type: 'post',
-      dataType: 'json',
-      data: JSON.stringify(taskObj),
-      success: function(revTaskObj) {
-        revTaskObj = revTaskObj[0];
-        //TODO
-        var taskId = '#task-' + revTaskObj['pk'];
-        //var task = new Task($(taskId));
-        task.setTitle(revTaskObj.fields['title']);
-        task.setDetail(revTaskObj.fields['detail']);
-        task.setTags(revTaskObj.fields['tag']);
-        task.toggleAll();
-      }
-    });
   });
 
   //set action for done-op, default rate is 5
@@ -146,7 +150,7 @@ $(document).ready(function() {
     var task = new Task(taskElem);
     var taskObj = {
       id: task.getID(),
-      rate: 5
+      rate: 5,
     };
     $.ajax({
       url: '/task/done/',
@@ -159,5 +163,4 @@ $(document).ready(function() {
       }
     });
   });
-
 });

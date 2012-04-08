@@ -43,7 +43,7 @@ def update_task(request):
         task = Task.objects.get(id=taskObj['id'])
         print task
         if task:
-            task.title = taskObj['title']
+            #task.title = taskObj['title']
             task.detail = taskObj['detail']
             task.save()
             new_task = Task.objects.filter(id=taskObj['id'])
