@@ -3,8 +3,8 @@
 
 {% for mode, tasks in tasks_list.items %}
 <br>
-<div id={{mode}} class="task-div"> <!--filter-->
-    <h3 class="task-div-header">{{mode}}</h3>
+<div id={{mode}} class="task-div clearfix">
+    <a href="#" class="task-div-header">{{mode}}</a>
     <ul class="task-div-body">
         {% for atask in tasks %}
         <li id={{atask.id|prefix:"task-"}} class="task-li">

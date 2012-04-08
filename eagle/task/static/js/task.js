@@ -39,9 +39,9 @@ $(document).ready(function() {
   
   //set toggle for task-div
   $('.task-div-header').click(function() {
-    $(this).next().slideToggle()
-    .find('.task-body').hide().end()
-    .find('.task-footer').hide();
+    $(this).next().slideToggle("slow")
+    .find('.task-body').hide("slow").end()
+    .find('.task-footer').hide("slow");
   });
 
   //set toggle for task-title
