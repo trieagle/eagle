@@ -41,6 +41,7 @@ class Task(models.Model):
         return wrapper
 
     #@debug
+
     def done(self):
         is_done = False
         try:
@@ -65,7 +66,7 @@ class Task(models.Model):
         return is_done
 
     def __unicode__(self):
-        return str(self.id) + self.title
+        return str(self.id) + ' ' + self.title
 
     class Meta:
         ordering = ['title']
@@ -81,6 +82,9 @@ class Status(models.Model):
     task = models.ForeignKey(Task)
     rate = models.IntegerField(default=5)
     time = models.DateTimeField(default=datetime.datetime.now)
+
+    def __unicode__(self):
+        return 'rate of task: ' + str(self.task.id) + ' is ' + str(self.rate) + ' time is : ' + str(self.time)
 
     class Meta:
         ordering = ['-time']
