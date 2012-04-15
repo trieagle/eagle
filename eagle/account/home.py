@@ -7,65 +7,75 @@ import collections;
 import datetime
 import calendar
 
+COLL_TAG, COLL_DAY, COLL_WEEK, COLL_MONTH, COLL_OVER_MONTH, COLL_RECORD = range(6)
+
+def get_task_coll(task):
+    if not task_item.alive:
+        continue
+    if task_item.done():
+        return COLL_RECORD
+        ''' not suitable!!! TODO'''
+        continue
+    if False and not task_item.active():
+        return COLL_RECORD
+        '''not in use!!!'''
+        ''' overdue tasks'''
+    elif task_item.mode == task_model.TAG_TASK:
+        return COLL_TAG
+    elif task_item.mode == task_model.ONCE_TASK:
+        print '~~~in-once-task~~~', task_item
+        delt_year = task_item.begin_time.year - cur_date.year
+        delt_month = task_item.begin_time.month - cur_date.month
+        delt_weekday = task_item.begin_time.weekday() - cur_date.weekday()
+        delt_day = (task_item.begin_time - cur_date).days
+
+        if delt_year > 0 or delt_month > 0:
+            return COLL_OVER_MONTH
+        elif delt_day > delt_weekday:
+            return COLL_MONTH
+        elif delt_day > 0:
+            return COLL_WEEK
+        else:
+            return COLL_DAY
+
+    elif task_item.mode == task_model.DAY_TASK:
+        print '~~~in-day-task~~~', task_item
+        return COLL_DAY
+    elif task_item.mode == task_model.WEEK_TASK: 
+        print '~~~in-week-task~~~', task_item
+        if cur_date.weekday() == 6:
+        '''the last day of the week, so the task must be done today'''
+            return COLL_DAY
+        else:
+            return COLL_WEEK
+    elif task_item.mode == task_model.MONTH_TASK:
+        print '~~~in-month-task~~~', task_item
+        max_month_day = calendar.monthrange(cur_date.year, cur_date.month)[1]
+        last_month_day = datetime.datetime(cur_date.year, cur_date.month, max_month_day)
+        if cur_date.day == max_month_day:
+            return COLL_DAY
+        elif max_month_day - cur_date.day > last_month_day.weekday() - cur_date.weekday():
+            return COLL_MONTH
+        else:
+            '''the last week of the month, so the task must be done today'''
+            return COLL_WEEK
+    else:
+        ''' simplified with error '''
+        return COLL_OVER_MONTH
+
 def fetch_lists(user_id):
-    tag_task, day_task, week_task, month_task, over_month_task, task_record = [], [], [], [], [], []
     ''' xx_task contains tasks *must* to be done in xx'''
+    task_dict = { "in tag": [],
+                  "on today": [],
+                  "in this week": [],
+                  "in this month": [],
+                  "over a month": [],
+                  "records": []}
     all_tasks = task_model.Task.objects.filter(owner=user_id)
     cur_date = datetime.datetime.now()
     for task_item in all_tasks:
-        if not task_item.alive:
-            continue
-        if task_item.done():
-            task_record.append(task_item)
-            ''' not suitable!!! TODO'''
-            continue
-        if False and not task_item.active():
-            '''not in use!!!'''
-            task_record.insert(0, task_item)
-            ''' overdue tasks'''
-        elif task_item.mode == task_model.TAG_TASK:
-            tag_task.append(task_item)
-        elif task_item.mode == task_model.ONCE_TASK:
-            print '~~~in-once-task~~~', task_item
-            delt_year = task_item.begin_time.year - cur_date.year
-            delt_month = task_item.begin_time.month - cur_date.month
-            delt_weekday = task_item.begin_time.weekday() - cur_date.weekday()
-            delt_day = (task_item.begin_time - cur_date).days
-
-            if delt_year > 0 or delt_month > 0:
-                over_month_task.append(task_item)
-            elif delt_day > delt_weekday:
-                month_task.append(task_item)
-            elif delt_day > 0:
-                week_task.append(task_item)
-            else:
-                day_task.append(task_item)
-        elif task_item.mode == task_model.DAY_TASK:
-            print '~~~in-day-task~~~', task_item
-            day_task.append(task_item)
-        elif task_item.mode == task_model.WEEK_TASK: 
-            print '~~~in-week-task~~~', task_item
-            if cur_date.weekday() == 6:
-                '''the last day of the week, so the task must be done today'''
-                day_task.append(task_item)
-            else:
-                week_task.append(task_item)
-        elif task_item.mode == task_model.MONTH_TASK:
-            print '~~~in-month-task~~~', task_item
-            max_month_day = calendar.monthrange(cur_date.year, cur_date.month)[1]
-            last_month_day = datetime.datetime(cur_date.year, cur_date.month, max_month_day)
-            if cur_date.day == max_month_day:
-                day_task.append(task_item)
-            elif max_month_day - cur_date.day > last_month_day.weekday() - cur_date.weekday():
-                month_task.append(task_item)
-            else:
-                '''the last week of the month, so the task must be done today'''
-                week_task.append(task_item)
-        else:
-            ''' simplified with error '''
-            over_month_task.append(task_item)
-
-    return tag_task, day_task, week_task, month_task, over_month_task, task_record             
+        task_dict[get_task_coll(task_item)].append(task_item)
+    return task_dict
 
 def home(request):
     account = Account.objects.get(user=request.user) 
