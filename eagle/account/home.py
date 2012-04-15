@@ -7,6 +7,12 @@ import collections;
 import datetime
 import calendar
 
+task_coll = {"on today": 1,
+             "in this week": 2,
+             "in this month": 3,
+             "over a month": 4,
+             "records": 5} 
+
 def fetch_lists(user_id):
     tag_task, day_task, week_task, month_task, over_month_task, task_record = [], [], [], [], [], []
     ''' xx_task contains tasks *must* to be done in xx'''
@@ -69,28 +75,27 @@ def fetch_lists(user_id):
 
 def home(request):
     account = Account.objects.get(user=request.user) 
-    tag_task, day_task, week_task, month_task, over_month_task, task_record = fetch_lists(
-        account.id)
+    #tag_task, day_task, week_task, month_task, over_month_task, task_record = fetch_lists(
+    #    account.id)
+    task_dict = fetch_lists(account.id)
+    for _, li in task_dict.items():
+        li.sort(key=lambda t: t.create_time)
+
     #print day_task, week_task, month_task, year_task, task_done
     
-    tasks_list = {"on today": day_task,
-                  "in this week": week_task,
-                  "in this month": month_task,
-                  "over a month": over_month_task,
-                  "records": task_record}
+    #tasks_list = {"on today": day_task,
+    #              "in this week": week_task,
+    #              "in this month": month_task,
+    #              "over a month": over_month_task,
+    #              "records": task_record}
 
     print '-----------------------------'
-    for key, value in tasks_list.items():
-        print key,value
+    for key, value in task_dict.items():
+        print key, value
     print '-----------------------------'
     
-    priority = {"on today": 1,
-                "in this week": 2,
-                "in this month": 3,
-                "over a month": 4,
-                "records": 5}
     ordered_tasks_list = collections.OrderedDict(sorted(tasks_list.items(), key=lambda t: priority[t[0]]))
     return render_to_response("common/index.html",
                               {"tasks_list": ordered_tasks_list,
-                               "tag_tasks":tag_task},
+                               "tag_tasks": tag_task},
                               context_instance=RequestContext(request))
