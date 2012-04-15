@@ -1,10 +1,10 @@
 
 {% load task_extra %}
 
-{% for mode, tasks in tasks_list.items %}
+{% for index, tasks in tasks_list.items %}
 <br>
-<div id={{mode}} class="task-div boxed clearfix">
-    <a href="#" class="task-div-header">{{mode}}</a>
+<div id={{index|dict_index:list_name}} class="task-div boxed clearfix">
+    <a href="#" class="task-div-header">{{index|dict_index:list_name}}</a>
     <ul class="task-div-body">
         {% for atask in tasks %}
         {% include "task/task_item.html" %}
