@@ -1,0 +1,33 @@
+{% load task_extra %}
+<li id={{atask.id|prefix:"task-"}} class="task-li">
+<div class="task-header"> 
+    <a href="#" class="task-priority">{{atask.priority}}</a>
+    <a href="#" class="task-title" >{{atask.title}}</a>
+    <a class="task-rate">Done?</a>
+    <a class="task-remove">Remove?</a>
+</div>
+
+<div class="task-body">
+    <div class="task-detail"> {{atask.detail}} </div>
+</div>
+
+<div class="task-footer">
+    <div class="task-mode">
+        <span class="edit-mode">Edit mode:</span>
+    </div>
+    <div class="task-time">
+        <span class="edit-time">Edit time:</span>
+    </div>
+    <div class="task-tag">
+        <span class="edit-tag-list">Edit tags:</span>
+        <ul>
+            {% for t in atask.tag.all %}
+            <li>
+            <a href="#">{{t.name}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+</li>
+
