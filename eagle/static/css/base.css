@@ -135,6 +135,9 @@ ul {
     float:left;
     color:#d1e8ff;
 }
+#box {
+}
+
 #left-box {
     padding:2%;
     width: 57.8%
@@ -167,6 +170,18 @@ ul {
     text-shadow:1px 1px #6a8c1a;
     color:#0d1d3b;
 }
+.task-create {
+    position:relative;
+}
+.task-create .edit-left {
+}
+
+.task-create .edit-right {
+}
+
+
+
+
 .task-div {
 }
 .task-div-body{
@@ -205,6 +220,12 @@ ul {
 .task-footer * {
     display:inline-block;
 }
+.task-tag {
+    visibility:hidden;
+    position:fixed;
+}
+
+
 
 /**
  * login reg part
@@ -293,84 +314,6 @@ div.help-text{
 
 
 
-
-.submit-button,
-.delete-snippet,
-.hist-snippet,
-.edit-snippet,
-.download-snippet {
-    border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    padding:7px 10px;
-    margin-left:10px;
-    background:transparent url(../images/blu.png) repeat scroll left -17px;
-    color:#fff !important;
-    font-size:14px;
-    border:1px solid #053c7b;
-    text-shadow:1px 1px #053c7b;
-    font-weight:bold;
-}
-.delete-snippet,
-.hist-snippet,
-.edit-snippet {
-    background:transparent url(../images/login.png) repeat scroll left -17px;
-    border:1px solid #6a8c1a;
-    text-shadow:1px 1px #6a8c1a;
-}
-.delete-snippet {
-    background:transparent url(../images/red.png) repeat scroll left -17px;
-    border:1px solid #600;
-    text-shadow:1px 1px #600;
-}
-.delete-snippet:hover,
-.edit-snippet:hover,
-.download-snippet:hover {
-    background:transparent url(../images/blu.png) repeat scroll left -10px;
-    color:#fff !important;
-}
-.hist-snippet:hover,
-.edit-snippet:hover {
-    color:#fff !important;
-    background:transparent url(../images/login.png) repeat scroll left -10px;
-}
-.delete-snippet:hover {
-    background:transparent url(../images/red.png) repeat scroll left -10px;
-}
-
-.submit-button {
-    margin-left:0;
-    cursor:pointer;
-    margin-right:10px;
-    font-family:'Lucida Grande',sans-serif;
-    line-height:19px;
-    padding:4px 10px;
-}
-.edit-link,
-.delete-link {
-    padding:4px 10px;
-    margin:7px 5px 7px 0;
-    color:#fff;
-    background:transparent url(../images/login.png) repeat scroll left -17px;
-    border:1px solid #6a8c1a;
-    text-shadow:1px 1px #6a8c1a;
-    border-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-}
-.delete-link {
-    background:transparent url(../images/red.png) repeat scroll left -17px;
-    border:1px solid #600;
-    text-shadow:1px 1px #600;
-}
-.edit-link:hover,
-.delete-link:hover {
-    background:transparent url(../images/login.png) repeat scroll left -10px;
-    color:#fff;
-}
-.delete-link:hover {
-    background:transparent url(../images/red.png) repeat scroll left -10px;
-}
 
 /**
 CANT TOUCH THIS

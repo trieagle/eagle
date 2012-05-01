@@ -15,13 +15,13 @@
 {% block content %}
 <div id="box" class="clearfix">
 
-    <div id="left-box" class="left-box box-container clearfix">
+    <div id="left-box" class="left-box box-container grid_7 clearfix">
         <h2>Tasks</h2><h4>I want to…</h4>
         {% include "task/task_create.html" %}
         {% include "task/task_list.html" %}
     </div>
 
-    <div id="right-box" class="right-box box-container clearfix">
+    <div id="right-box" class="right-box box-container grid_5 clearfix">
         <div id="mood-box" class="clearfix">
             <h2>mood-diaries</h2>
             {% include "task/mood_diary.html" %}
